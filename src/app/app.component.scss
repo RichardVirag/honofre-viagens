@@ -1,1 +1,28 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+.all {
+    height: 100vh;
+}
+
+$colors: (
+    primary: #249073,
+    primary-light: lighten(#249073, 20%),
+    primary-dark: darken(#249073, 20%),
+);
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+};
+
+.nav {
+    height: 100%;
+    background: color(primary-dark);
+
+    ul {
+
+        li {
+
+            a {
+                color: #FFF;
+            }
+        }
+    }
+}
