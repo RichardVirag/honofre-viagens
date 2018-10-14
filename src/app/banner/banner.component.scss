@@ -1,0 +1,32 @@
+.banner-item {
+    position: relative;
+
+    img {
+        max-width: 70%;
+    }
+
+    .action {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+
+        a {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        a.edit {
+            color: #337ab7;
+        }
+
+        a.remove {
+            color: #e45865;
+        }
+    }
+}
+
+.banner-preview {
+    img {
+        width: 100%;
+    }
+}
