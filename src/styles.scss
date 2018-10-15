@@ -26,6 +26,18 @@ html, body {
 
 .in-blk {
     display: inline-block;
+
+    .mid {
+        vertical-align: middle;
+    }
+
+    .top {
+      vertical-align: top;
+    }
+
+    .bot {
+      vertical-align: bottom;
+    }
 }
 
 /* components */
