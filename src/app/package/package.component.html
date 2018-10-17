@@ -1,3 +1,23 @@
-<p>
-  package works!
-</p>
+<header class="main-header blk">
+    <h1 class="in-blk">Pacotes</h1>
+</header>
+
+<div class="main-content">
+    <editor apiKey="yjgt1z5mynyxw03me4v3keov8f4qx2f1y8dzwopelf9hipmo"
+            [init]="
+              {
+                theme: 'modern',
+                menubar: false,
+                height : '480',
+                block_formats: 'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3',
+                font_formats: 'Arial=arial,helvetica,sans-serif;Courier New=courier new,courier,monospace;Helvetica=helvetica;Tahoma=tahoma,arial,helvetica,sans-serif;Trebuchet MS=trebuchet ms,geneva;Verdana=verdana,geneva;',
+                plugins: [
+                    'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                    'save table contextmenu directionality emoticons template paste textcolor'
+                ],
+                toolbar: 'formatselect | bold italic underline removeformat | fontselect fontsizeselect forecolor | alignleft aligncenter alignright alignjustify | table bullist numlist link image media preview code'
+              }
+            ">
+    </editor>
+</div>

@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { BannerComponent } from './banner/banner.component';
 import { PackageComponent } from './package/package.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PackageComponent } from './package/package.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    EditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
