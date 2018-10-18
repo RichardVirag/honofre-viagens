@@ -6,14 +6,14 @@
     <div class="row">
         <div class="col-sm-9">
             <div class="form-group">
-                <label>Título</label>
+                <label class="required-label">Título</label>
                 <input type="text"
                        class="form-control">
             </div>
         </div>
         <div class="col-sm-3">
             <div class="form-group">
-                <label>Status</label>
+                <label class="required-label">Status</label>
                 <select class="form-control">
                     <option>Ativo</option>
                     <option>Inativo</option>
@@ -25,13 +25,13 @@
         <div class="col-sm-9">
             <div class="form-group">
                 <div class="form-group">
-                    <label>Resumo do pacote / Descição curta</label>
+                    <label class="required-label">Resumo do pacote / Descição curta</label>
                     <textarea rows="8" class="form-control"></textarea>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
-            <label>A partir de</label>
+            <label class="required-label">A partir de</label>
             <div class="input-group">
                 <div class="input-group-addon">R$</div>
                 <input type="text"
@@ -69,7 +69,7 @@
             </div>
             <div class="form-group">
                 <input type="file" class="form-control">
-            </div>            
+            </div>
         </div>
         <div class="col-sm-3">
             <div class="panel panel-default">
@@ -97,7 +97,7 @@
     <br>
 
     <div class="form-group">
-        <label>Descrição</label>
+        <label class="required-label">Descrição</label>
         <editor apiKey="yjgt1z5mynyxw03me4v3keov8f4qx2f1y8dzwopelf9hipmo"
                 [init]="
                   {

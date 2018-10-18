@@ -61,3 +61,12 @@ $main-font: 'Calibri';
 .main-content {
     margin: 50px 30px;
 }
+
+.required-label {
+
+    &:after {
+      content: '*';
+      margin-left: 3px;
+      color: #FF0000;
+    }
+}
