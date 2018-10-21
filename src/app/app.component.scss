@@ -49,7 +49,8 @@ $awesome: FontAwesome;
                         font-family: $main-font;
                     }
                 }
-                a:hover {
+                a:hover,
+                a.active {
                     border-left: 5px solid color(primary);
                     background: color(primary-medium);
                 }

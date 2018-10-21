@@ -7,22 +7,31 @@
                      alt="Logo Admin">
                 <ul>
                     <li class="blk">
-                        <a routerLink="" class="blk">
+                        <a routerLink=""
+                           routerLinkActive="active"
+                           [routerLinkActiveOptions]="{exact: true}"
+                           class="blk">
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li class="blk">
-                        <a routerLink="categorias" class="blk">
+                        <a routerLink="categorias"
+                           routerLinkActive="active"
+                           class="blk">
                             <span>Categorias</span>
                         </a>
                     </li>
                     <li class="blk">
-                        <a routerLink="banners" class="blk">
+                        <a routerLink="banners"
+                           routerLinkActive="active"
+                           class="blk">
                             <span>Banners</span>
                         </a>
                     </li>
                     <li class="blk">
-                        <a routerLink="pacotes" class="blk">
+                        <a routerLink="pacotes"
+                           routerLinkActive="active"
+                           class="blk">
                             <span>Pacotes</span>
                         </a>
                     </li>
