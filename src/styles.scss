@@ -1,5 +1,3 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
-
 /* common */
 
 * {
@@ -43,6 +41,25 @@ html, body {
 /* components */
 
 $main-font: 'Calibri';
+
+.all {
+    height: 100vh;
+}
+
+.fixed-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.fixed-content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+}
 
 .main-header {
     width: 100%;

@@ -8,6 +8,8 @@ import { CategoryComponent } from './category/category.component';
 import { BannerComponent } from './banner/banner.component';
 import { PackageComponent } from './package/package.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { LoginComponent } from './login/login.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     DashboardComponent,
     CategoryComponent,
     BannerComponent,
-    PackageComponent
+    PackageComponent,
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
