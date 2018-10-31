@@ -1,0 +1,18 @@
+.login-content {
+    background-color: #0d3228;
+    background-image: linear-gradient(141deg, #249073 0%, #1e7961 45%, #124738 95%);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    height: 100vh;
+
+    .login {
+        background: #FFF;
+        padding: 50px;
+        height: 100vh;
+
+        h1 {
+            margin-top: 150px;
+        }
+    }
+}
