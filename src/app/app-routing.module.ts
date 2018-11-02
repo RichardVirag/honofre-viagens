@@ -5,6 +5,7 @@ import { CategoryComponent } from './category/category.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { PackageComponent } from './package/package.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
        path: 'pacotes',
        component: PackageComponent,
        canActivate: [AuthGuard]
+    },
+    {
+       path: '**',
+       component: NotfoundComponent
     }
 ];
 
