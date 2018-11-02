@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { AuthService } from './auth.service';
+import { AuthService } from './_services/auth.service';
 import { AuthGuard } from './auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
