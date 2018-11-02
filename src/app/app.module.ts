@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AuthService } from './_services/auth.service';
+import { ApiService } from './_services/api.service';
 import { AuthGuard } from './auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,7 +34,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     AppRoutingModule,
     EditorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

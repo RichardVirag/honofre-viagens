@@ -14,6 +14,6 @@ export class MenuComponent implements OnInit {
     ngOnInit() {
     }
 
-    LoggedInUser = auth.getToken();
+    LoggedInUser = JSON.parse(this.auth.getLoggedUser()).current_user;
 
 }

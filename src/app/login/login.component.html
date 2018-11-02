@@ -4,6 +4,10 @@
             <div class="col-sm-6 col-md-6 login">
                 <h1>Honofre Admin</h1>
                 <hr>
+                <div *ngIf="errorMsg != null" class="alert alert-danger" role="alert">
+                    <strong>Whoops!</strong>
+                    {{ errorMsg }}.
+                </div>
                 <form [formGroup]="form" (ngSubmit)="login()">
                     <div class="form-group">
                         <label for="login">Login</label>
@@ -31,7 +35,7 @@
                         </button>
                     </div>
                     <hr>
-                    <a href="#">Esqueci minha senha</a>                    
+                    <a href="#">Esqueci minha senha</a>
                 </form>
             </div>
             <div class="col-sm-6 col-md-6"></div>
