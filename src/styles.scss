@@ -22,18 +22,22 @@ html, body {
     margin: 0 auto;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .in-blk {
     display: inline-block;
 
-    .mid {
+    &.mid {
         vertical-align: middle;
     }
 
-    .top {
+    &.top {
       vertical-align: top;
     }
 
-    .bot {
+    &.bot {
       vertical-align: bottom;
     }
 }

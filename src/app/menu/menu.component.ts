@@ -9,9 +9,11 @@ import { AuthService } from '../auth.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private auth: AuthService) { }
+    constructor(private auth: AuthService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
+
+    LoggedInUser = auth.getToken();
 
 }

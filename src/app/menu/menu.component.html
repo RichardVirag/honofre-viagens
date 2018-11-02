@@ -1,7 +1,15 @@
 <nav class="nav">
     <img src="assets/img/logo-icon.png"
-         class="blk center"
+         class="in-blk mid"
          alt="Logo Admin">
+    <p class="in-blk mid">
+        Olá {{ LoggedInUser }},<br>seja bem-vindo(a)!
+        <a class="blk"
+           *ngIf="auth.isLoggednIn()"
+           (click)="auth.logout()">
+            Logout
+        </a>
+    </p>
     <ul>
         <li class="blk">
             <a [routerLink]="['/']"
@@ -33,5 +41,4 @@
             </a>
         </li>
     </ul>
-    <button mat-button *ngIf="auth.isLoggednIn()" (click)="auth.logout()">Logout</button>
 </nav>
