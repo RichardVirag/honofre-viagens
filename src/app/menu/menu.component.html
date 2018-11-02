@@ -33,4 +33,5 @@
             </a>
         </li>
     </ul>
+    <button mat-button *ngIf="auth.isLoggednIn()" (click)="auth.logout()">Logout</button>
 </nav>
