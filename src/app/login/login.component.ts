@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { ApiService } from '../_services/api.service';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
     selector: 'app-login',
@@ -12,6 +13,7 @@ import { ApiService } from '../_services/api.service';
 export class LoginComponent implements OnInit {
     form;
     errorMsg = null;
+
     constructor(
         private fb: FormBuilder,
         private myRoute: Router,
@@ -28,10 +30,11 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        if (this.form.valid) {
+        const md5 = new Md5();
+        if (this.form.valid) {            
             this.api.userAuth(
                 this.form.value.login,
-                this.form.value.password
+                md5.appendStr(this.form.value.password).end()
             )
             .subscribe(
                 data => {

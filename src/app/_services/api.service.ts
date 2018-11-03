@@ -14,6 +14,6 @@ export class ApiService {
         return this.httpClient.post(this.apiUrl + '/auth',{
             "username":user,
             "password":pass
-        });        
+        });
     }
 }
