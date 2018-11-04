@@ -6,7 +6,7 @@
         Olá {{ LoggedInUser }},<br>seja bem-vindo(a)!
         <a class="blk"
            *ngIf="auth.isLoggednIn()"
-           (click)="auth.logout()">
+           (click)="auth.logout(LoggedInUser)">
             Logout
         </a>
     </p>

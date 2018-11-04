@@ -16,4 +16,14 @@ export class ApiService {
             "password":pass
         });
     }
+
+    logout(user) {
+        return this.httpClient.post(this.apiUrl + '/logout',{
+            "username":user
+        },
+        {
+            responseType: 'text', 
+            observe: 'response'
+        });
+    }
 }
