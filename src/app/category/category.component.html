@@ -15,7 +15,15 @@
                                    class="form-control"
                                    placeholder="Buscar...">
                         </div>
-                        <table class="table">
+                        <div class=""
+                             *ngIf="!hasCategoriesToShow()">
+                            <div class="alert alert-warning" role="alert">
+                              <strong>Atenção!</strong>
+                              Você ainda não possui nenhuma categorias.
+                            </div>
+                        </div>
+                        <table class="table"
+                               *ngIf="hasCategoriesToShow()">
                             <thead>
                                 <tr>
                                     <th scope="col">Título</th>
@@ -24,35 +32,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                <tr>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
+                                <tr *ngFor="let category of categories">
+                                    <td>{{ category.title }}</td>
+                                    <td>{{ category.sequence }}</td>
+                                    <td>{{ category.status }}</td>
                                 </tr>
                             </tbody>
                         </table>

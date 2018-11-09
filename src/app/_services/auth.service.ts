@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../_services/api.service';
-import {Observable} from 'rxjs/Rx';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +27,6 @@ export class AuthService {
                 localStorage.removeItem("LoggedInUser");
                 this.myRoute.navigate(["login"]);
             }
-        }
+        })
     }
 }

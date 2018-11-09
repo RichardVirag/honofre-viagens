@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-    constructor(private httpClient:HttpClient) { }
+    constructor(
+        private httpClient:HttpClient
+    ) { }
 
-    apiUrl = "http://localhost:4500/";
+    apiUrl = "http://localhost:4500";
 
     userAuth(user, pass) {
         return this.httpClient.post(this.apiUrl + '/auth',{
@@ -22,8 +23,14 @@ export class ApiService {
             "username":user
         },
         {
-            responseType: 'text', 
+            responseType: 'text',
             observe: 'response'
+        });
+    }
+
+    getAllCategories() {
+        return this.httpClient.get(this.apiUrl + '/categories/all', {
+            headers: new HttpHeaders().set('Authorization', '109781f090bbc7aa112c99be8dde8a13')
         });
     }
 }
