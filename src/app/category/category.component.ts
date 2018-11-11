@@ -14,7 +14,7 @@ export class CategoryComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.api.getAllCategories()
+        this.api.getAllPrimaryCategories()
         .subscribe(
             data => {
                 this.categories = data;
@@ -27,6 +27,15 @@ export class CategoryComponent implements OnInit {
             return true;
         }
         return false;
+    }
+
+    hasSubcategories() {
+        this.api.getSubcategories()
+        .subscribe(
+            data => {
+                return data
+            }
+      );
     }
 
 }

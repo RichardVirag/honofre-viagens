@@ -31,8 +31,8 @@
                                     <th scope="col">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr *ngFor="let category of categories">
+                            <tbody *ngFor="let category of categories">
+                                <tr>
                                     <td>{{ category.title }}</td>
                                     <td>{{ category.sequence }}</td>
                                     <td>{{ category.status }}</td>

@@ -28,9 +28,14 @@ export class ApiService {
         });
     }
 
-    getAllCategories() {
-        return this.httpClient.get(this.apiUrl + '/categories/all', {
-            headers: new HttpHeaders().set('Authorization', '109781f090bbc7aa112c99be8dde8a13')
+    getAllPrimaryCategories() {
+        return this.httpClient.get(this.apiUrl + '/categories/primary/all', {
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
+    }
+
+    getSubcategories() {
+        return this.httpClient.get(//**/);
     }
 }
