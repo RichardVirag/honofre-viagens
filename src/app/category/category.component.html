@@ -37,6 +37,12 @@
                                     <td>{{ category.sequence }}</td>
                                     <td>{{ category.status }}</td>
                                 </tr>
+                                <tr *ngFor="let subs of category.subcategories"
+                                    class="subCategory">
+                                    <td>{{ subs.title }}</td>
+                                    <td>{{ subs.sequence }}</td>
+                                    <td>{{ subs.status }}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

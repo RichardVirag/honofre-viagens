@@ -35,7 +35,10 @@ export class ApiService {
         });
     }
 
-    getSubcategories() {
-        return this.httpClient.get(//**/);
+    getSubcategories(id) {
+        return this.httpClient.get(this.apiUrl + '/categories/sub/' + id, {
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
     }
 }

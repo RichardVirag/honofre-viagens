@@ -29,5 +29,14 @@
         padding: 10px;
         border-radius: 3px;
     }
+}
 
+.table {
+    tr.subCategory {
+        background: #EEE;
+
+        td:first-child {
+            padding-left: 40px;
+        }
+    }
 }

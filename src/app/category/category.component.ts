@@ -8,7 +8,8 @@ import { ApiService } from '../_services/api.service';
     styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-    categories = null
+    categories = null;
+
     constructor(
         private api: ApiService
     ) { }
@@ -18,6 +19,9 @@ export class CategoryComponent implements OnInit {
         .subscribe(
             data => {
                 this.categories = data;
+                for (let key in this.categories) {
+                    this.hasSubcategories(this.categories[key].id, key);
+                }
             }
         );
     }
@@ -29,13 +33,14 @@ export class CategoryComponent implements OnInit {
         return false;
     }
 
-    hasSubcategories() {
-        this.api.getSubcategories()
+    hasSubcategories(id, key) {
+        this.api.getSubcategories(id)
         .subscribe(
             data => {
-                return data
+                this.categories[key].subcategories = data;
+                console.log(this.categories);
             }
-      );
+        );
     }
 
 }
