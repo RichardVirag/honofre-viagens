@@ -53,50 +53,61 @@
                                 Adicionar nova Categoria
                             </div>
                             <div class="panel-body">
-                                <div class="form-group">
-                                    <label class="required-label">Título</label>
-                                    <input type="text"
-                                           class="form-control">
+                                <div *ngIf="errorMsg != null" class="alert alert-danger" role="alert">
+                                    <strong>Whoops!</strong>
+                                    {{ errorMsg }}.
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-5">
-                                        <div class="form-group">
-                                            <label class="blk">
-                                                Sequência
-                                                <i class="tooltip-icon fa fa-question-circle">
-                                                    <span>Deixe este campo vazio para adicionar ao final da lista</span>
-                                                </i>
-                                            </label>
-                                            <input type="number"
-                                                   class="form-control"
-                                                   min="0">
+                                <form [formGroup]="formCategory" (ngSubmit)="addCategory()">
+                                    <div class="form-group">
+                                        <label class="required-label">Título</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               formControlName="title">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                                <label class="blk">
+                                                    Sequência
+                                                    <i class="tooltip-icon fa fa-question-circle">
+                                                        <span>Deixe este campo vazio para adicionar ao final da lista</span>
+                                                    </i>
+                                                </label>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       min="0"
+                                                       formControlName="sequence">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="form-group">
+                                                <label class="required-label">Status</label>
+                                                <select class="form-control"
+                                                        formControlName="status">
+                                                    <option [ngValue]="1">Ativo</option>
+                                                    <option [ngValue]="0">Inativo</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-7">
-                                        <div class="form-group">
-                                            <label class="required-label">Status</label>
-                                            <select class="form-control">
-                                                <option>Ativo</option>
-                                                <option>Inativo</option>
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="required-label">Tipo</label>
+                                        <select class="form-control"
+                                                formControlName="type">
+                                            <option value="null">Principal</option>
+                                            <optgroup label="Filha de">
+                                                <option *ngFor="let category of categories"
+                                                        [ngValue]="category.id">
+                                                    {{ category.title }}
+                                                </option>
+                                            </optgroup>
+                                        </select>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="required-label">Tipo</label>
-                                    <select class="form-control">
-                                        <option>Principal</option>
-                                        <optgroup label="Filha de">
-                                            <option>Teste</option>
-                                            <option>asdf</option>
-                                            <option>Lorem</option>
-                                            <option>Ipsum</option>
-                                        </optgroup>
-                                    </select>
-                                </div>
-                                <button class="btn btn-success">
-                                    Salvar categoria
-                                </button>
+                                    <button type="submit"
+                                            class="btn btn-success">
+                                        Salvar categoria
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
