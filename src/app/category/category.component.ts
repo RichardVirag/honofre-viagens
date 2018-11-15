@@ -9,6 +9,7 @@ import { ApiService } from '../_services/api.service';
 })
 export class CategoryComponent implements OnInit {
     categories = null;
+    userFilter: any = { title: '' };
 
     constructor(
         private api: ApiService

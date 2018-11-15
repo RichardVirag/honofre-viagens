@@ -23,6 +23,7 @@
     "@tinymce/tinymce-angular": "^2.3.1",
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
+    "ngx-filter-pipe": "^2.1.2",
     "rxjs": "~6.2.0",
     "tinymce": "^4.8.3",
     "ts-md5": "^1.2.4",
