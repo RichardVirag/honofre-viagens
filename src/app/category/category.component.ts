@@ -79,11 +79,11 @@ export class CategoryComponent implements OnInit {
                     this.formCategory.value.type,
                     this.editCategory.id
                 ).subscribe(
-                  res => {
-                      this.getCategories();
-                      this.editCategory = [];
-                      this.formCategory.reset();
-                  }
+                    res => {
+                        this.getCategories();
+                        this.editCategory = [];
+                        this.formCategory.reset();
+                    }
                 );
             }
             else {
@@ -93,10 +93,10 @@ export class CategoryComponent implements OnInit {
                     this.formCategory.value.status_id,
                     this.formCategory.value.type
                 ).subscribe(
-                  res => {
-                      this.getCategories();
-                      this.formCategory.reset();
-                  }
+                    res => {
+                        this.getCategories();
+                        this.formCategory.reset();
+                    }
                 );
             }
             this.errorMsg = null;
@@ -127,11 +127,20 @@ export class CategoryComponent implements OnInit {
     }
 
     remove(id) {
-        this.errorMsg = null;
+        this.cancelEdition();
+        if (confirm("Você tem certeza que quer excluir?")) {
+            this.api.deleteCategory(id).subscribe(
+                res => {
+                    alert('Categoria removida com sucesso!');
+                    this.getCategories();
+                }
+            );
+        }
     }
 
     cancelEdition() {
         this.editCategory = [];
+        this.errorMsg = null;
         this.formCategory.reset();
     }
 

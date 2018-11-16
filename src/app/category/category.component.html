@@ -46,7 +46,7 @@
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a (click)="remove(category.id, null)"
+                                        <a (click)="remove(category.id)"
                                            class="remove">
                                             <i class="fa fa-times"></i>
                                         </a>
@@ -64,7 +64,7 @@
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a (click)="remove(subs.id, category.id)"
+                                        <a (click)="remove(subs.id)"
                                            class="remove">
                                             <i class="fa fa-times"></i>
                                         </a>
@@ -127,7 +127,7 @@
                                                 formControlName="type"
                                                 [(ngModel)]="editCategory.type">
                                             <option value="0">Principal</option>
-                                            <optgroup label="Filha de">                                                
+                                            <optgroup label="Filha de">
                                                 <ng-container *ngFor="let category of categories">
                                                     <option *ngIf="editCategory.id != category.id"
                                                             [ngValue]="category.id">
