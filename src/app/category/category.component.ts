@@ -109,11 +109,11 @@ export class CategoryComponent implements OnInit {
     edit(id, parent_id) {
         this.errorMsg = null;
         if(parent_id == null) {
-            this.editCategory = this.categories.find(x=>x.id == id);
+            this.editCategory = JSON.parse(JSON.stringify(this.categories.find(x=>x.id == id)));
             this.editCategory.type = 0;
         }
         else {
-            var parent = this.categories.find(x=>x.id == parent_id);
+            var parent =  JSON.parse(JSON.stringify(this.categories.find(x=>x.id == parent_id)));
             this.editCategory = parent.subcategories.find(x=>x.id == id);
             this.editCategory.type = parent_id;
         }
