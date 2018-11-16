@@ -12,6 +12,8 @@ export class CategoryComponent implements OnInit {
     formCategory;
     errorMsg = null;
     categories = null;
+    editCategory = [];
+
     userFilter: any = { title: '' };
 
     constructor(
@@ -19,9 +21,10 @@ export class CategoryComponent implements OnInit {
         private api: ApiService
     ) {
         this.formCategory = fb.group({
+            id: [''],
             title: ['', [Validators.required]],
             sequence: [''],
-            status: ['', [Validators.required]],
+            status_id: ['', [Validators.required]],
             type: ['', Validators.required]
         });
     }
@@ -58,27 +61,66 @@ export class CategoryComponent implements OnInit {
         );
     }
 
-    addCategory() {
+    addUpdateCategory() {
         if (this.formCategory.valid) {
-            if(this.formCategory.value.sequence == "") {
+            if(this.formCategory.value.sequence == "" ||
+               this.formCategory.value.sequence == undefined) {
                 this.formCategory.value.sequence = "null";
             }
-            this.api.insertCategory(
-                this.formCategory.value.title,
-                this.formCategory.value.sequence,
-                this.formCategory.value.status,
-                this.formCategory.value.type
-            ).subscribe(
-              res => {
-                  this.getCategories();
-                  this.formCategory.reset();
-              }
-            );
+            if(this.formCategory.value.type == 0) {
+                this.formCategory.value.type = "null";
+            }
+
+            if(this.editCategory.id != undefined) {
+                alert("Estou editando");
+            }
+            else {
+                this.api.insertCategory(
+                    this.formCategory.value.title,
+                    this.formCategory.value.sequence,
+                    this.formCategory.value.status_id,
+                    this.formCategory.value.type
+                ).subscribe(
+                  res => {
+                      this.getCategories();
+                      this.formCategory.reset();
+                  }
+                );
+            }
             this.errorMsg = null;
         }
         else {
             this.errorMsg = "Preencha os campos corretamente"
         }
+    }
+
+    edit(id, parent_id) {
+        this.errorMsg = null;
+        if(parent_id == null) {
+            this.editCategory = this.categories.find(x=>x.id == id);
+            this.editCategory.type = 0;
+        }
+        else {
+            var parent = this.categories.find(x=>x.id == parent_id);
+            this.editCategory = parent.subcategories.find(x=>x.id == id);
+            this.editCategory.type = parent_id;
+        }
+
+        if(this.editCategory.status_id == "0") {
+            this.editCategory.status_id = 0;
+        }
+        else {
+            this.editCategory.status_id = 1;
+        }
+    }
+
+    remove(id) {
+        this.errorMsg = null;
+    }
+
+    cancelEdition() {
+        this.editCategory = [];
+        this.formCategory.reset();
     }
 
 }

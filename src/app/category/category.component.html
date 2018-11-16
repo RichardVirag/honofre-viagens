@@ -30,6 +30,8 @@
                                     <th scope="col">Título</th>
                                     <th scope="col">Sequência</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col" width="50">Editar</th>
+                                    <th scope="col" width="50">Excluir</th>
                                 </tr>
                             </thead>
                             <tbody *ngFor="let category of categories | filterBy: userFilter">
@@ -37,12 +39,36 @@
                                     <td>{{ category.title }}</td>
                                     <td>{{ category.sequence }}</td>
                                     <td>{{ category.status }}</td>
+                                    <td class="text-center">
+                                        <a (click)="edit(category.id, null)"
+                                           class="edit">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a (click)="remove(category.id, null)"
+                                           class="remove">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 <tr *ngFor="let subs of category.subcategories"
                                     class="subCategory">
                                     <td>{{ subs.title }}</td>
                                     <td>{{ subs.sequence }}</td>
                                     <td>{{ subs.status }}</td>
+                                    <td class="text-center">
+                                        <a (click)="edit(subs.id, category.id)"
+                                           class="edit">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a (click)="remove(subs.id, category.id)"
+                                           class="remove">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -50,19 +76,21 @@
                     <div class="col-sm-4 col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Adicionar nova Categoria
+                                Adicionar / Editar Categoria
                             </div>
                             <div class="panel-body">
                                 <div *ngIf="errorMsg != null" class="alert alert-danger" role="alert">
                                     <strong>Whoops!</strong>
                                     {{ errorMsg }}.
                                 </div>
-                                <form [formGroup]="formCategory" (ngSubmit)="addCategory()">
+                                <form [formGroup]="formCategory" (ngSubmit)="addUpdateCategory()">
                                     <div class="form-group">
                                         <label class="required-label">Título</label>
                                         <input type="text"
                                                class="form-control"
-                                               formControlName="title">
+                                               value="{{ editCategory.title }}"
+                                               formControlName="title"
+                                               [(ngModel)]="editCategory.title">
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-5">
@@ -76,14 +104,17 @@
                                                 <input type="number"
                                                        class="form-control"
                                                        min="0"
-                                                       formControlName="sequence">
+                                                       value="{{ editCategory.sequence }}"
+                                                       formControlName="sequence"
+                                                       [(ngModel)]="editCategory.sequence">
                                             </div>
                                         </div>
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label class="required-label">Status</label>
                                                 <select class="form-control"
-                                                        formControlName="status">
+                                                        formControlName="status_id"
+                                                        [(ngModel)]="editCategory.status_id">
                                                     <option [ngValue]="1">Ativo</option>
                                                     <option [ngValue]="0">Inativo</option>
                                                 </select>
@@ -93,8 +124,9 @@
                                     <div class="form-group">
                                         <label class="required-label">Tipo</label>
                                         <select class="form-control"
-                                                formControlName="type">
-                                            <option value="null">Principal</option>
+                                                formControlName="type"
+                                                [(ngModel)]="editCategory.type">
+                                            <option value="0">Principal</option>
                                             <optgroup label="Filha de">
                                                 <option *ngFor="let category of categories"
                                                         [ngValue]="category.id">
@@ -106,6 +138,12 @@
                                     <button type="submit"
                                             class="btn btn-success">
                                         Salvar categoria
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            *ngIf="editCategory.id"
+                                            (click)="cancelEdition()">
+                                        Cancelar
                                     </button>
                                 </form>
                             </div>

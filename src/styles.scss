@@ -91,3 +91,25 @@ $main-font: 'Calibri';
       color: #FF0000;
     }
 }
+
+.edit {
+    color: #337ab7;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.remove {
+    color: #e45865;
+    font-size: 17px;
+    line-height: 1;
+}
+
+.edit:hover{
+    cursor: pointer;
+    color: #337ab7;
+}
+
+.remove:hover {
+    cursor: pointer;
+    color: #e45865;
+}
