@@ -127,11 +127,13 @@
                                                 formControlName="type"
                                                 [(ngModel)]="editCategory.type">
                                             <option value="0">Principal</option>
-                                            <optgroup label="Filha de">
-                                                <option *ngFor="let category of categories"
-                                                        [ngValue]="category.id">
-                                                    {{ category.title }}
-                                                </option>
+                                            <optgroup label="Filha de">                                                
+                                                <ng-container *ngFor="let category of categories">
+                                                    <option *ngIf="editCategory.id != category.id"
+                                                            [ngValue]="category.id">
+                                                        {{ category.title }}
+                                                    </option>
+                                                </ng-container>
                                             </optgroup>
                                         </select>
                                     </div>

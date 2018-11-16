@@ -53,4 +53,16 @@ export class ApiService {
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
+
+    updateCategory(title, sequence, status, type, id) {
+        return this.httpClient.post(this.apiUrl + '/categories/edit/' + id,{
+            "title":title,
+            "sequence":sequence,
+            "status":status,
+            "type":type
+        },{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
 }

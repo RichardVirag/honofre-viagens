@@ -72,7 +72,19 @@ export class CategoryComponent implements OnInit {
             }
 
             if(this.editCategory.id != undefined) {
-                alert("Estou editando");
+                this.api.updateCategory(
+                    this.formCategory.value.title,
+                    this.formCategory.value.sequence,
+                    this.formCategory.value.status_id,
+                    this.formCategory.value.type,
+                    this.editCategory.id
+                ).subscribe(
+                  res => {
+                      this.getCategories();
+                      this.editCategory = [];
+                      this.formCategory.reset();
+                  }
+                );
             }
             else {
                 this.api.insertCategory(
