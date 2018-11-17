@@ -12,7 +12,7 @@ export class CategoryComponent implements OnInit {
     formCategory;
     errorMsg = null;
     categories = null;
-    editCategory = [];
+    editCategory = JSON.parse('{"id":"undefined","title":"undefined","sequence":"undefined","status_id":"undefined"}');
 
     userFilter: any = { title: '' };
 
