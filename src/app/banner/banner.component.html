@@ -13,35 +13,15 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Banners</div>
                             <div class="panel-body">
-                                <div class="panel panel-default">
-                                    <div class="banner-item panel-body">
-                                        <img src="assets/img/banners/1.jpg">
-                                        <div class="action">
-                                            <a class="edit blk">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a class="remove blk">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                <div class="alert alert-warning"
+                                     *ngIf="!hasBannersToShow()">
+                                    <strong>Atenção!</strong>
+                                    Você ainda não possui nenhum banner.
                                 </div>
-                                <div class="panel panel-default">
+                                <div *ngFor="let banner of banners"
+                                     class="panel panel-default">
                                     <div class="banner-item panel-body">
-                                        <img src="assets/img/banners/2.jpg">
-                                        <div class="action">
-                                            <a class="edit blk">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a class="remove blk">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="banner-item panel-body">
-                                        <img src="assets/img/banners/3.jpg">
+                                        <img [src]="banner.src">
                                         <div class="action">
                                             <a class="edit blk">
                                                 <i class="fa fa-edit"></i>

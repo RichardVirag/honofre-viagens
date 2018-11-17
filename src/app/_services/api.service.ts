@@ -11,6 +11,8 @@ export class ApiService {
 
     apiUrl = "http://localhost:4500";
 
+    /* Auth */
+
     userAuth(user, pass) {
         return this.httpClient.post(this.apiUrl + '/auth',{
             "username":user,
@@ -27,6 +29,8 @@ export class ApiService {
             observe: 'response'
         });
     }
+
+    /* Category */
 
     getAllPrimaryCategories() {
         return this.httpClient.get(this.apiUrl + '/categories/primary/all', {
@@ -68,6 +72,15 @@ export class ApiService {
 
     deleteCategory(id) {
         return this.httpClient.delete(this.apiUrl + '/categories/remove/' + id,{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
+
+    /* Banner */
+
+    getAllBanners() {
+        return this.httpClient.get(this.apiUrl + '/banners/all', {
             headers: new HttpHeaders().set('Authorization',
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });

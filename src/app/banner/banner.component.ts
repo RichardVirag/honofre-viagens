@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../_services/api.service';
 
 @Component({
   selector: 'app-banner',
@@ -7,10 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
     imageSrc = null;
+    banners = null;
 
-    constructor() { }
+    constructor(
+        private api: ApiService
+    ) { }
 
     ngOnInit() {
+      this.getBanners();
+    }
+
+    getBanners() {
+        this.api.getAllBanners()
+        .subscribe(
+            data => {
+                this.banners = data;                
+            }
+        );
+    }
+
+    hasBannersToShow() {
+        if(this.banners != null) {
+            return true;
+        }
+        return false;
     }
 
     previewImage(event: Event): void {
