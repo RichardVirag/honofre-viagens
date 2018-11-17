@@ -52,9 +52,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary">
-                                    Adicionar novo banner
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -104,19 +101,15 @@
                             <div class="panel-body">
                                 <div class="panel panel-default">
                                     <div class="banner-preview panel-body">
-                                        <img src="assets/img/banners/1.jpg">
+                                        <img [src]="imageSrc || 'http://placehold.it/1920x450'">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="file" class="form-control">
+                                    <input type="file"
+                                           class="form-control"
+                                           accept="image/*"
+                                           (change)="previewImage($event)">
                                 </div>
-                                <p class="blk">
-                                    <small>
-                                        Resolução ideal: 1920px x 1080px
-                                    </small>
-                                    <br>
-                                    <br>
-                                </p>
                                 <button class="btn btn-success">
                                     Salvar banner
                                 </button>
