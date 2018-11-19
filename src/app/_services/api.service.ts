@@ -99,4 +99,11 @@ export class ApiService {
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
+
+    deleteBanner(id) {
+        return this.httpClient.delete(this.apiUrl + '/banners/remove/' + id,{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
 }

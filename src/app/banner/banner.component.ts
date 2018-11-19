@@ -136,6 +136,18 @@ export class BannerComponent implements OnInit {
         this.imageSrc = this.editBanner.src;
     }
 
+    remove(id) {
+        this.cancelEdition();
+        if (confirm("Você tem certeza que quer excluir?")) {
+            this.api.deleteBanner(id).subscribe(
+                res => {
+                    alert('Banner removido com sucesso!');
+                    this.getBanners();
+                }
+            );
+        }
+    }
+
     cancelEdition() {
         this.editBanner = JSON.parse('{"id":"","url":"","new_window":"","status_id":"","sequence":"","alt":""}');
         this.errorMsg = null;

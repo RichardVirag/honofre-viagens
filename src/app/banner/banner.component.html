@@ -20,14 +20,16 @@
                                 </div>
                                 <div *ngFor="let banner of banners"
                                      class="panel panel-default">
-                                    <div class="banner-item panel-body"
-                                         (click)="edit(banner.id)">
-                                        <img [src]="banner.src">
+                                    <div class="banner-item panel-body">
+                                        <img [src]="banner.src"
+                                             (click)="edit(banner.id)">
                                         <div class="action">
-                                            <a class="edit blk">
+                                            <a class="edit blk"
+                                               (click)="edit(banner.id)">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a class="remove blk">
+                                            <a class="remove blk"
+                                               (click)="remove(banner.id)">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </div>
