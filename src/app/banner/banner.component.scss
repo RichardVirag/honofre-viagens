@@ -1,6 +1,10 @@
 .banner-item {
     position: relative;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     img {
         max-width: 70%;
     }
@@ -22,4 +26,8 @@ input[type=file] {
     padding: 10px;
     display: block;
     height: auto;
+}
+
+.btn-danger {
+    margin-left: 10px;
 }

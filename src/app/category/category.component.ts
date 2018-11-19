@@ -46,7 +46,7 @@ export class CategoryComponent implements OnInit {
     }
 
     hasCategoriesToShow() {
-        if(this.categories != null) {
+        if(this.categories != null && this.categories.length > 0) {
             return true;
         }
         return false;
@@ -139,7 +139,7 @@ export class CategoryComponent implements OnInit {
     }
 
     cancelEdition() {
-        this.editCategory = [];
+        this.editCategory = JSON.parse('{"id":"","title":"","sequence":"","status_id":""}');
         this.errorMsg = null;
         this.formCategory.reset();
     }

@@ -20,7 +20,8 @@
                                 </div>
                                 <div *ngFor="let banner of banners"
                                      class="panel panel-default">
-                                    <div class="banner-item panel-body">
+                                    <div class="banner-item panel-body"
+                                         (click)="edit(banner.id)">
                                         <img [src]="banner.src">
                                         <div class="action">
                                             <a class="edit blk">
@@ -49,14 +50,17 @@
                                         <input type="text"
                                                class="form-control"
                                                placeholder="http://"
-                                               formControlName="url">
+                                               formControlName="url"
+                                               value="{{ editBanner.url }}"
+                                               [(ngModel)]="editBanner.url">
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Nova janela?</label>
                                                 <select class="form-control"
-                                                        formControlName="new_window">
+                                                        formControlName="new_window"
+                                                        [(ngModel)]="editBanner.new_window">
                                                     <option [ngValue]="1">Sim</option>
                                                     <option [ngValue]="0">Não</option>
                                                 </select>
@@ -66,7 +70,8 @@
                                             <div class="form-group">
                                                 <label class="required-label">Status</label>
                                                 <select class="form-control"
-                                                        formControlName="status_id">
+                                                        formControlName="status_id"
+                                                        [(ngModel)]="editBanner.status_id">
                                                     <option [ngValue]="1">Ativo</option>
                                                     <option [ngValue]="0">Inativo</option>
                                                 </select>
@@ -83,7 +88,9 @@
                                                 <input type="number"
                                                        class="form-control"
                                                        min="0"
-                                                       formControlName="sequence">
+                                                       formControlName="sequence"
+                                                       value="{{ editBanner.sequence }}"
+                                                       [(ngModel)]="editBanner.sequence">
                                             </div>
                                         </div>
                                     </div>
@@ -92,7 +99,9 @@
                                         <input type="text"
                                                class="form-control"
                                                placeholder="Ex.: Passeios incríveis em promoção"
-                                               formControlName="alt">
+                                               formControlName="alt"
+                                               value="{{ editBanner.alt }}"
+                                               [(ngModel)]="editBanner.alt">
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +125,12 @@
                                     </div>
                                     <button class="btn btn-success">
                                         Salvar banner
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-danger"
+                                            *ngIf="editBanner.id"
+                                            (click)="cancelEdition()">
+                                        Cancelar
                                     </button>
                                 </div>
                             </div>

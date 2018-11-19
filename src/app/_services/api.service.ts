@@ -92,4 +92,11 @@ export class ApiService {
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
+
+    updateBanner(uploadData, id) {
+        return this.httpClient.post(this.apiUrl + '/banners/edit/' + id,uploadData,{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
 }

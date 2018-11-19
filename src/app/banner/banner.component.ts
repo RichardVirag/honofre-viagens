@@ -12,6 +12,7 @@ export class BannerComponent implements OnInit {
     errorMsg = null;
     imageSrc = null;
     banners = null;
+    editBanner = JSON.parse('{"id":"","url":"","new_window":"","status_id":"","sequence":"","alt":""}');
 
     hasUploadedFile = false;
     selectedFile;
@@ -45,7 +46,7 @@ export class BannerComponent implements OnInit {
     }
 
     hasBannersToShow() {
-        if(this.banners != null) {
+        if(this.banners != null && this.banners.length > 0) {
             return true;
         }
         return false;
@@ -65,21 +66,34 @@ export class BannerComponent implements OnInit {
 
     addUpdateBanner() {
         if (this.formBanner.valid) {
-            if (this.hasUploadedFile) {
-                if(this.formBanner.value.sequence == "" ||
-                   this.formBanner.value.sequence == undefined) {
-                    this.formBanner.value.sequence = "null";
-                }
+            if(this.formBanner.value.sequence == "" ||
+               this.formBanner.value.sequence == undefined) {
+                this.formBanner.value.sequence = "null";
+            }
 
-                let uploadData = new FormData();
+            let uploadData = new FormData();
 
-                uploadData.append('bannerImg', this.selectedFile);
-                uploadData.append('url', this.formBanner.value.url);
-                uploadData.append('new_window', this.formBanner.value.new_window);
-                uploadData.append('status', this.formBanner.value.status_id);
-                uploadData.append('sequence', this.formBanner.value.sequence);
-                uploadData.append('alt', this.formBanner.value.alt);
+            uploadData.append('bannerImg', this.selectedFile);
+            uploadData.append('url', this.formBanner.value.url);
+            uploadData.append('new_window', this.formBanner.value.new_window);
+            uploadData.append('status', this.formBanner.value.status_id);
+            uploadData.append('sequence', this.formBanner.value.sequence);
+            uploadData.append('alt', this.formBanner.value.alt);
 
+            if (this.editBanner.id != "") {
+                this.api.updateBanner(
+                    uploadData, this.editBanner.id
+                ).subscribe(
+                    res => {
+                        this.getBanners();
+                        this.formBanner.reset();
+                        this.imageSrc = null;
+                    }
+                );
+
+                this.errorMsg = null;
+            }
+            else if (this.hasUploadedFile) {
                 this.api.insertBanner(
                     uploadData
                 ).subscribe(
@@ -99,5 +113,33 @@ export class BannerComponent implements OnInit {
         else {
             this.errorMsg = "Preencha os campos corretamente"
         }
+    }
+
+    edit(id) {
+        this.errorMsg = null;
+        this.editBanner = JSON.parse(JSON.stringify(this.banners.find(x=>x.id == id)));
+
+        if(this.editBanner.status == "Inativo") {
+            this.editBanner.status_id = 0;
+        }
+        else {
+            this.editBanner.status_id = 1;
+        }
+
+        if(this.editBanner.new_window == "0") {
+            this.editBanner.new_window = 0;
+        }
+        else {
+            this.editBanner.new_window = 1;
+        }
+
+        this.imageSrc = this.editBanner.src;
+    }
+
+    cancelEdition() {
+        this.editBanner = JSON.parse('{"id":"","url":"","new_window":"","status_id":"","sequence":"","alt":""}');
+        this.errorMsg = null;
+        this.imageSrc = null;
+        this.formBanner.reset();
     }
 }
