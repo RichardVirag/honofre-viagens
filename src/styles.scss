@@ -113,3 +113,36 @@ $main-font: 'Calibri';
     cursor: pointer;
     color: #e45865;
 }
+
+.tooltip-icon {
+    position: relative;
+    float: right;
+    margin: 3px 0;
+
+    &:hover {
+        cursor: help;
+    }
+
+    &:hover span {
+        display: block;
+    }
+
+    span {
+        position: absolute;
+        display: none;
+        width: 130px;
+        top: 0;
+        bottom: 0;
+        left: 150%;
+        margin: auto;
+        height: fit-content;
+        font-family: Helvetica;
+        z-index: 3;
+        background: #222;
+        font-size: 12px;
+        text-align: center;
+        color: #FFF;
+        padding: 10px;
+        border-radius: 3px;
+    }
+}

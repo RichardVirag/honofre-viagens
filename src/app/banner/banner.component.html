@@ -35,67 +35,91 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Informações</div>
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label>URL</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           placeholder="http://">
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Nova janela?</label>
-                                            <select class="form-control">
-                                                <option></option>
-                                                <option>Sim</option>
-                                                <option>Não</option>
-                                            </select>
+                    <form [formGroup]="formBanner" (ngSubmit)="addUpdateBanner()">
+                        <div class="col-sm-4 col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Informações</div>
+                                <div class="panel-body">
+                                    <div *ngIf="errorMsg != null" class="alert alert-danger" role="alert">
+                                        <strong>Whoops!</strong>
+                                        {{ errorMsg }}.
+                                    </div>
+                                    <div class="form-group">
+                                        <label>URL</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="http://"
+                                               formControlName="url">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Nova janela?</label>
+                                                <select class="form-control"
+                                                        formControlName="new_window">
+                                                    <option [ngValue]="1">Sim</option>
+                                                    <option [ngValue]="0">Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="required-label">Status</label>
+                                                <select class="form-control"
+                                                        formControlName="status_id">
+                                                    <option [ngValue]="1">Ativo</option>
+                                                    <option [ngValue]="0">Inativo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="blk">
+                                                    Sequência
+                                                    <i class="tooltip-icon fa fa-question-circle">
+                                                        <span>Deixe este campo vazio para adicionar ao final da lista</span>
+                                                    </i>
+                                                </label>
+                                                <input type="number"
+                                                       class="form-control"
+                                                       min="0"
+                                                       formControlName="sequence">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="required-label">Status</label>
-                                            <select class="form-control">
-                                                <option>Ativo</option>
-                                                <option>Inativo</option>
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>Atributo ALT</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               placeholder="Ex.: Passeios incríveis em promoção"
+                                               formControlName="alt">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Atributo ALT</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           placeholder="Ex.: Passeios incríveis em promoção">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Preview</div>
-                            <div class="panel-body">
-                                <div class="panel panel-default">
-                                    <div class="banner-preview panel-body">
-                                        <img [src]="imageSrc || 'http://placehold.it/1920x450'">
+                        <div class="col-sm-4 col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Preview</div>
+                                <div class="panel-body">
+                                    <div class="panel panel-default">
+                                        <div class="banner-preview panel-body">
+                                            <img [src]="imageSrc || 'http://placehold.it/1920x450'">
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="required-label">Imagem</label>
+                                        <input type="file"
+                                               class="form-control"
+                                               accept="image/*"
+                                               (change)="previewImage($event)">
+                                    </div>
+                                    <button class="btn btn-success">
+                                        Salvar banner
+                                    </button>
                                 </div>
-                                <div class="form-group">
-                                    <input type="file"
-                                           class="form-control"
-                                           accept="image/*"
-                                           (change)="previewImage($event)">
-                                </div>
-                                <button class="btn btn-success">
-                                    Salvar banner
-                                </button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
