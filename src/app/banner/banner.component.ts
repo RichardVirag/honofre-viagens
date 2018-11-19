@@ -86,6 +86,7 @@ export class BannerComponent implements OnInit {
                     res => {
                         this.getBanners();
                         this.formBanner.reset();
+                        this.imageSrc = null;
                     }
                 );
 
