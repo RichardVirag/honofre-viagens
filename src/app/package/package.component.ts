@@ -9,10 +9,11 @@ import { ApiService } from '../_services/api.service';
 })
 export class PackageComponent implements OnInit {
     formPackage;
-    showForm = true;
-    showModal = false
+    showForm = false;
+    showModal = false;
     errorMsg = null;
     editPackage = JSON.parse('{"id":"","title":"","status_id":"","short_description":"","description":"","value":"","first_image":"","second_image":"","third_image":"","fourth_image":""}');
+    categoriesToSelect = null;
 
     packageFilter: any = { title: '' };
 
@@ -44,6 +45,7 @@ export class PackageComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getCategoriesToSelect();
     }
 
     newPackage() {
@@ -52,6 +54,19 @@ export class PackageComponent implements OnInit {
 
     categoriesModal() {
         this.showModal = !this.showModal;
+    }
+
+    getCategoriesToSelect() {
+        this.api.getAllCategories()
+        .subscribe(
+            data => {
+                this.categoriesToSelect = data;
+            }
+        );
+    }
+
+    selectCategory(id) {
+        
     }
 
     addUpdatePackage() {

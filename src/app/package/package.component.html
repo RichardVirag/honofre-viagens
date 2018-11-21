@@ -212,20 +212,21 @@
                                 (click)="categoriesModal()">
                             Adicionar categorias
                         </button>
-                        <div class="categoriesModal">
+                        <div class="categoriesModal"
+                             *ngIf="showModal">
                             <div class="content">
                                 <div class="title">
                                     Gerenciar categorias
                                 </div>
                                 <div class="body">
                                     <ul class="toSelect">
-                                        <li>Nacional</li>
-                                        <li>Nacional - Pacotes</li>
-                                        <li>Nacional - DayUse</li>
-                                        <li>Nacional - Excursão</li>
-                                        <li>Internacional</li>
-                                        <li>Internacional - Europa</li>
-                                        <li>Disney</li>
+                                        <li *ngFor="let category of categoriesToSelect"
+                                            (click)="selectCategory(category.id)">
+                                            <span *ngIf="category.parent != null">
+                                                {{ category.parent }} -
+                                            </span>
+                                            <b>{{ category.title }}</b>
+                                        </li>
                                     </ul>
                                     <label class="required-label blk">
                                         Categorias associadas
@@ -250,7 +251,8 @@
                                     </ul>
                                 </div>
                                 <div class="footer">
-                                    <button class="btn btn-success">
+                                    <button class="btn btn-success"
+                                            (click)="categoriesModal()">
                                         Ok
                                     </button>
                                 </div>

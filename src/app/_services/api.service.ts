@@ -32,6 +32,13 @@ export class ApiService {
 
     /* Category */
 
+    getAllCategories() {
+        return this.httpClient.get(this.apiUrl + '/categories/all', {
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
+
     getAllPrimaryCategories() {
         return this.httpClient.get(this.apiUrl + '/categories/primary/all', {
             headers: new HttpHeaders().set('Authorization',
