@@ -6,22 +6,174 @@
             <header class="main-header blk">
                 <h1 class="in-blk">Pacotes</h1>
             </header>
+            <div class="main-content"
+                 *ngIf="!showForm">
+                  <div class="row">
+                      <div class="col-sm-10 col-md-10">
+                          <input type="text"
+                                 class="form-control"
+                                 [(ngModel)]="packageFilter.title"
+                                 placeholder="Buscar...">
+                      </div>
+                      <div class="col-sm-2 col-md-2">
+                          <button type="button"
+                                  (click)="newPackage()"
+                                  class="btn btn-success blk addpackage">
+                              Adicionar novo pacote
+                          </button>
+                      </div>
+                  </div>
+                  <br>
+                  <br>
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th scope="col">Imagem</th>
+                              <th scope="col">Pacote</th>
+                              <th scope="col">Valor</th>
+                              <th scope="col">Status</th>
+                              <th scope="col" width="50">Editar</th>
+                              <th scope="col" width="50">Excluir</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <div class="table-content-image">
+                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
+                                  </div>
+                              </td>
+                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
+                              <td>R$ 2100,00</td>
+                              <td>Ativo</td>
+                              <td class="text-center">
+                                  <a (click)="edit(category.id, null)"
+                                     class="edit">
+                                      <i class="fa fa-edit"></i>
+                                  </a>
+                              </td>
+                              <td class="text-center">
+                                  <a (click)="remove(category.id)"
+                                     class="remove">
+                                      <i class="fa fa-times"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="table-content-image">
+                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
+                                  </div>
+                              </td>
+                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
+                              <td>R$ 2100,00</td>
+                              <td>Ativo</td>
+                              <td class="text-center">
+                                  <a (click)="edit(category.id, null)"
+                                     class="edit">
+                                      <i class="fa fa-edit"></i>
+                                  </a>
+                              </td>
+                              <td class="text-center">
+                                  <a (click)="remove(category.id)"
+                                     class="remove">
+                                      <i class="fa fa-times"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="table-content-image">
+                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
+                                  </div>
+                              </td>
+                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
+                              <td>R$ 2100,00</td>
+                              <td>Ativo</td>
+                              <td class="text-center">
+                                  <a (click)="edit(category.id, null)"
+                                     class="edit">
+                                      <i class="fa fa-edit"></i>
+                                  </a>
+                              </td>
+                              <td class="text-center">
+                                  <a (click)="remove(category.id)"
+                                     class="remove">
+                                      <i class="fa fa-times"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="table-content-image">
+                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
+                                  </div>
+                              </td>
+                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
+                              <td>R$ 2100,00</td>
+                              <td>Ativo</td>
+                              <td class="text-center">
+                                  <a (click)="edit(category.id, null)"
+                                     class="edit">
+                                      <i class="fa fa-edit"></i>
+                                  </a>
+                              </td>
+                              <td class="text-center">
+                                  <a (click)="remove(category.id)"
+                                     class="remove">
+                                      <i class="fa fa-times"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <div class="table-content-image">
+                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
+                                  </div>
+                              </td>
+                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
+                              <td>R$ 2100,00</td>
+                              <td>Ativo</td>
+                              <td class="text-center">
+                                  <a (click)="edit(category.id, null)"
+                                     class="edit">
+                                      <i class="fa fa-edit"></i>
+                                  </a>
+                              </td>
+                              <td class="text-center">
+                                  <a (click)="remove(category.id)"
+                                     class="remove">
+                                      <i class="fa fa-times"></i>
+                                  </a>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+            </div>
 
-            <div class="main-content">
+            <div class="main-content"
+                 *ngIf="showForm">
+                <form [formGroup]="formPackage" (ngSubmit)="addUpdatePackage()">
                 <div class="row">
                     <div class="col-sm-9">
                         <div class="form-group">
                             <label class="required-label">Título</label>
                             <input type="text"
-                                   class="form-control">
+                                   class="form-control"
+                                   value="{{ editPackage.title }}"
+                                   formControlName="title"
+                                   [(ngModel)]="editPackage.title">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label class="required-label">Status</label>
-                            <select class="form-control">
-                                <option>Ativo</option>
-                                <option>Inativo</option>
+                            <select class="form-control"
+                                    value="{{ editPackage.status_id }}"
+                                    formControlName="status_id"
+                                    [(ngModel)]="editPackage.status_id">
+                                <option [ngValue]="1">Ativo</option>
+                                <option [ngValue]="0">Inativo</option>
                             </select>
                         </div>
                     </div>
@@ -31,18 +183,78 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label class="required-label">Resumo do pacote / Descição curta</label>
-                                <textarea rows="8" class="form-control"></textarea>
+                                <textarea rows="8"
+                                          class="form-control"
+                                          formControlName="short_description"
+                                          [(ngModel)]="editPackage.short_description">
+                                    {{ editPackage.short_description }}
+                                </textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 freeColumn">
                         <label class="required-label">A partir de</label>
                         <div class="input-group">
                             <div class="input-group-addon">R$</div>
                             <input type="text"
                                    class="form-control"
-                                   placeholder="0000">
+                                   placeholder="0000"
+                                   value="{{ editPackage.value }}"
+                                   formControlName="value"
+                                   [(ngModel)]="editPackage.value">
                             <div class="input-group-addon">,00</div>
+                        </div>
+                        <br>
+                        <label class="required-label blk">
+                            Categorias
+                        </label>
+                        <button class="btn btn-primary addCategories"
+                                (click)="categoriesModal()">
+                            Adicionar categorias
+                        </button>
+                        <div class="categoriesModal">
+                            <div class="content">
+                                <div class="title">
+                                    Gerenciar categorias
+                                </div>
+                                <div class="body">
+                                    <ul class="toSelect">
+                                        <li>Nacional</li>
+                                        <li>Nacional - Pacotes</li>
+                                        <li>Nacional - DayUse</li>
+                                        <li>Nacional - Excursão</li>
+                                        <li>Internacional</li>
+                                        <li>Internacional - Europa</li>
+                                        <li>Disney</li>
+                                    </ul>
+                                    <label class="required-label blk">
+                                        Categorias associadas
+                                    </label>
+                                    <ul class="selected">
+                                        <li>
+                                            <span>
+                                                Disney
+                                            </span>
+                                            <a class="remove">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <span>
+                                                Disney - Orlando
+                                            </span>
+                                            <a class="remove">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="footer">
+                                    <button class="btn btn-success">
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,50 +264,78 @@
                     <div class="col-sm-3">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <img src="assets/img/banners/1.jpg"
+                                <img [src]="imagesSrc[0] || 'http://placehold.it/470x350'"
                                      class="package-image">
+                                <div class="form-group">
+                                   <input type="file"
+                                          class="form-control"
+                                          formControlName="first_image"
+                                          [(ngModel)]="editPackage.first_image">
+                                </div>
+                                <button class="btn btn-primary blk center"
+                                        (click)="deleteImage()"
+                                        *ngIf="imagesSrc[0] != undefined">
+                                    Excluir
+                                </button>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" class="form-control">
-                        </div>
-                        <p class="blk">
-                            <small>
-                                Resolução ideal: 1920px x 1080px
-                            </small>
-                        </p>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="assets/img/banners/2.jpg"
-                                     class="package-image">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <img src="assets/img/banners/3.jpg"
+                                <img [src]="imagesSrc[1] || 'http://placehold.it/470x350'"
                                      class="package-image">
+                                <div class="form-group">
+                                   <input type="file"
+                                          class="form-control"
+                                          formControlName="second_image"
+                                          [(ngModel)]="editPackage.second_image">
+                                </div>
+                                <button class="btn btn-primary blk center"
+                                        (click)="deleteImage()"
+                                        *ngIf="imagesSrc[1] != undefined">
+                                    Excluir
+                                </button>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="file" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <img src="assets/img/banners/1.jpg"
+                                <img [src]="imagesSrc[2] || 'http://placehold.it/470x350'"
                                      class="package-image">
+                                <div class="form-group">
+                                   <input type="file"
+                                          class="form-control"
+                                          formControlName="third_image"
+                                          [(ngModel)]="editPackage.third_image">
+                                </div>
+                                <button class="btn btn-primary blk center"
+                                        (click)="deleteImage()"
+                                        *ngIf="imagesSrc[2] != undefined">
+                                    Excluir
+                                </button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input type="file" class="form-control">
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <img [src]="imagesSrc[3] || 'http://placehold.it/470x350'"
+                                     class="package-image">
+                                <div class="form-group">
+                                   <input type="file"
+                                          class="form-control"
+                                          value="{{ editPackage.fourth_image }}"
+                                          formControlName="fourth_image"
+                                          [(ngModel)]="editPackage.fourth_image">
+                                </div>
+                                <button class="btn btn-primary blk center"
+                                        (click)="deleteImage()"
+                                        *ngIf="imagesSrc[3] != undefined">
+                                    Excluir
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -118,12 +358,20 @@
                                 ],
                                 toolbar: 'formatselect | bold italic underline removeformat | fontselect fontsizeselect forecolor | alignleft aligncenter alignright alignjustify | table bullist numlist link image media preview code'
                               }
-                            ">
+                            "
+                            formControlName="description"
+                            [(ngModel)]="editPackage.description">
+                        {{ editPackage.description }}
                     </editor>
                 </div>
                 <button class="btn btn-success">
                     Salvar pacote
                 </button>
+                <button class="btn btn-danger"
+                        (click)="cancel()">
+                    Cancelar
+                </button>
+                </form>
             </div>
         </div>
     </div>

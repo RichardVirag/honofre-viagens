@@ -14,7 +14,7 @@ export class CategoryComponent implements OnInit {
     categories = null;
     editCategory = JSON.parse('{"id":"","title":"","sequence":"","status_id":""}');
 
-    userFilter: any = { title: '' };
+    categoryFilter: any = { title: '' };
 
     constructor(
         private fb: FormBuilder,
