@@ -34,7 +34,7 @@
                                     <th scope="col" width="50">Excluir</th>
                                 </tr>
                             </thead>
-                            <tbody *ngFor="let category of categories | filterBy: userFilter">
+                            <tbody *ngFor="let category of categories | filterBy: categoryFilter">
                                 <tr>
                                     <td>{{ category.title }}</td>
                                     <td>{{ category.sequence }}</td>
