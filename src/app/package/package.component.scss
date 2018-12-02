@@ -110,6 +110,10 @@ form {
                         border-bottom: 1px solid #DDD;
                     }
 
+                    &:hover {
+                        cursor: pointer;
+                    }
+
                     i {
                         position: absolute;
                         top: 0;

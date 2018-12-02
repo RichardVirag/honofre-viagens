@@ -221,7 +221,7 @@
                                 <div class="body">
                                     <ul class="toSelect">
                                         <li *ngFor="let category of categoriesToSelect"
-                                            (click)="selectCategory(category.id)">
+                                            (click)="selectCategory(category)">
                                             <span *ngIf="category.parent != null">
                                                 {{ category.parent }} -
                                             </span>
@@ -232,18 +232,12 @@
                                         Categorias associadas
                                     </label>
                                     <ul class="selected">
-                                        <li>
-                                            <span>
-                                                Disney
+                                        <li *ngFor="let selcategory of selectedCategories"
+                                            (click)="removeSelectedCategory(selcategory)">
+                                            <span *ngIf="selcategory.parent != null">
+                                                {{ selcategory.parent }} -
                                             </span>
-                                            <a class="remove">
-                                                <i class="fa fa-times"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <span>
-                                                Disney - Orlando
-                                            </span>
+                                            <b>{{ selcategory.title }}</b>
                                             <a class="remove">
                                                 <i class="fa fa-times"></i>
                                             </a>

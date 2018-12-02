@@ -20,6 +20,7 @@ export class PackageComponent implements OnInit {
     hasUploadedFile = false;
     imagesSrc = [];
     selectedFiles = [];
+    selectedCategories = [];
 
     constructor(
         private fb: FormBuilder,
@@ -65,8 +66,18 @@ export class PackageComponent implements OnInit {
         );
     }
 
-    selectCategory(id) {
-        
+    selectCategory(category) {
+        this.selectedCategories.push(category);
+        this.categoriesToSelect.splice(
+            this.categoriesToSelect.indexOf(category), 1
+        );
+    }
+
+    removeSelectedCategory(selcategory) {
+        this.categoriesToSelect.push(selcategory);
+        this.selectedCategories.splice(
+            this.selectedCategories.indexOf(selcategory), 1
+        );
     }
 
     addUpdatePackage() {
