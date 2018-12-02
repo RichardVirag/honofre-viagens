@@ -3,7 +3,7 @@
         <app-menu class="col-md-2 col-sm-1 no-padding all fixed-menu">
         </app-menu>
         <div class="col-md-10 col-sm-11 no-padding all fixed-content">
-            <header class="main-header blk">
+            <header class="main-header blk" id="top">
                 <h1 class="in-blk">Pacotes</h1>
             </header>
             <div class="main-content"
@@ -48,7 +48,7 @@
                           <tr *ngFor="let package of packages | filterBy: packageFilter">
                               <td>
                                   <div class="table-content-image">
-                                      <img [src]="package.first_image || 'http://placehold.it/470x350'">
+                                      <img [src]="package.image || 'http://placehold.it/470x350'">
                                   </div>
                               </td>
                               <td>{{ package.title }}</td>
@@ -74,6 +74,10 @@
             <div class="main-content"
                  *ngIf="showForm">
                 <form [formGroup]="formPackage" (ngSubmit)="addUpdatePackage()">
+                <div *ngIf="errorMsg != null" class="alert alert-danger" role="alert">
+                    <strong>Whoops!</strong>
+                    {{ errorMsg }}.
+                </div>
                 <div class="row">
                     <div class="col-sm-9">
                         <div class="form-group">
@@ -178,15 +182,15 @@
                 <label>Imagens</label>
                 <div class="row">
                     <div class="col-sm-3">
-                        <div class="panel panel-default">
+                        <div class="panel panel-default product-image-main">
                             <div class="panel-body">
                                 <img [src]="imagesSrc[0] || 'http://placehold.it/470x350'"
                                      class="package-image">
                                 <div class="form-group">
                                    <input type="file"
                                           class="form-control"
-                                          formControlName="first_image"
-                                          [(ngModel)]="editPackage.first_image">
+                                          formControlName="src"
+                                          (change)="previewImage($event, 1)">
                                 </div>
                                 <button class="btn btn-primary blk center"
                                         (click)="deleteImage()"
@@ -204,8 +208,8 @@
                                 <div class="form-group">
                                    <input type="file"
                                           class="form-control"
-                                          formControlName="second_image"
-                                          [(ngModel)]="editPackage.second_image">
+                                          formControlName="src"
+                                          (change)="previewImage($event, 2)">
                                 </div>
                                 <button class="btn btn-primary blk center"
                                         (click)="deleteImage()"
@@ -223,8 +227,8 @@
                                 <div class="form-group">
                                    <input type="file"
                                           class="form-control"
-                                          formControlName="third_image"
-                                          [(ngModel)]="editPackage.third_image">
+                                          formControlName="src"
+                                          (change)="previewImage($event, 3)">
                                 </div>
                                 <button class="btn btn-primary blk center"
                                         (click)="deleteImage()"
@@ -243,8 +247,8 @@
                                    <input type="file"
                                           class="form-control"
                                           value="{{ editPackage.fourth_image }}"
-                                          formControlName="fourth_image"
-                                          [(ngModel)]="editPackage.fourth_image">
+                                          formControlName="src"
+                                          (change)="previewImage($event, 4)">
                                 </div>
                                 <button class="btn btn-primary blk center"
                                         (click)="deleteImage()"

@@ -37,10 +37,7 @@ export class PackageComponent implements OnInit {
             short_description: ['', [Validators.required]],
             description: ['', [Validators.required]],
             value: ['', [Validators.required]],
-            first_image: [''],
-            second_image: [''],
-            third_image: [''],
-            fourth_image: ['']
+            src: [''],
         });
 
         this.imagesSrc[0] = undefined;
@@ -102,7 +99,13 @@ export class PackageComponent implements OnInit {
     }
 
     addUpdatePackage() {
-
+        if (this.formPackage.valid) {
+            this.errorMsg = null;
+        }
+        else {
+            this.errorMsg = "Preencha os campos corretamente";
+            document.getElementById('top').scrollIntoView();
+        }
     }
 
     cancel() {
