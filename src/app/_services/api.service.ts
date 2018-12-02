@@ -113,4 +113,13 @@ export class ApiService {
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
+
+    /* Packages */
+
+    getAllPackages() {
+        return this.httpClient.get(this.apiUrl + '/packages/all', {
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
 }

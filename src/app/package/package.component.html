@@ -8,8 +8,15 @@
             </header>
             <div class="main-content"
                  *ngIf="!showForm">
+                  <div *ngIf="!hasPackagesToShow()">
+                      <div class="alert alert-warning" role="alert">
+                        <strong>Atenção!</strong>
+                        Você ainda não possui nenhuma categorias.
+                      </div>
+                  </div>
                   <div class="row">
-                      <div class="col-sm-10 col-md-10">
+                      <div class="col-sm-10 col-md-10"
+                           *ngIf="hasPackagesToShow()">
                           <input type="text"
                                  class="form-control"
                                  [(ngModel)]="packageFilter.title"
@@ -25,7 +32,8 @@
                   </div>
                   <br>
                   <br>
-                  <table class="table">
+                  <table class="table"
+                         *ngIf="hasPackagesToShow()">
                       <thead>
                           <tr>
                               <th scope="col">Imagem</th>
@@ -37,15 +45,15 @@
                           </tr>
                       </thead>
                       <tbody>
-                          <tr>
+                          <tr *ngFor="let package of packages">
                               <td>
                                   <div class="table-content-image">
-                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
+                                      <img [src]="package.first_image || 'http://placehold.it/470x350'">
                                   </div>
                               </td>
-                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
-                              <td>R$ 2100,00</td>
-                              <td>Ativo</td>
+                              <td>{{ package.title }}</td>
+                              <td>R$ {{ package.value }},00</td>
+                              <td>{{ package.status }}</td>
                               <td class="text-center">
                                   <a (click)="edit(category.id, null)"
                                      class="edit">
@@ -58,95 +66,7 @@
                                       <i class="fa fa-times"></i>
                                   </a>
                               </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div class="table-content-image">
-                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
-                                  </div>
-                              </td>
-                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
-                              <td>R$ 2100,00</td>
-                              <td>Ativo</td>
-                              <td class="text-center">
-                                  <a (click)="edit(category.id, null)"
-                                     class="edit">
-                                      <i class="fa fa-edit"></i>
-                                  </a>
-                              </td>
-                              <td class="text-center">
-                                  <a (click)="remove(category.id)"
-                                     class="remove">
-                                      <i class="fa fa-times"></i>
-                                  </a>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div class="table-content-image">
-                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
-                                  </div>
-                              </td>
-                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
-                              <td>R$ 2100,00</td>
-                              <td>Ativo</td>
-                              <td class="text-center">
-                                  <a (click)="edit(category.id, null)"
-                                     class="edit">
-                                      <i class="fa fa-edit"></i>
-                                  </a>
-                              </td>
-                              <td class="text-center">
-                                  <a (click)="remove(category.id)"
-                                     class="remove">
-                                      <i class="fa fa-times"></i>
-                                  </a>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div class="table-content-image">
-                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
-                                  </div>
-                              </td>
-                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
-                              <td>R$ 2100,00</td>
-                              <td>Ativo</td>
-                              <td class="text-center">
-                                  <a (click)="edit(category.id, null)"
-                                     class="edit">
-                                      <i class="fa fa-edit"></i>
-                                  </a>
-                              </td>
-                              <td class="text-center">
-                                  <a (click)="remove(category.id)"
-                                     class="remove">
-                                      <i class="fa fa-times"></i>
-                                  </a>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <div class="table-content-image">
-                                      <img src="http://localhost:4500/uploads/235d164f5ad867bb17e5a3cea488388d.jpg">
-                                  </div>
-                              </td>
-                              <td>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt ut</td>
-                              <td>R$ 2100,00</td>
-                              <td>Ativo</td>
-                              <td class="text-center">
-                                  <a (click)="edit(category.id, null)"
-                                     class="edit">
-                                      <i class="fa fa-edit"></i>
-                                  </a>
-                              </td>
-                              <td class="text-center">
-                                  <a (click)="remove(category.id)"
-                                     class="remove">
-                                      <i class="fa fa-times"></i>
-                                  </a>
-                              </td>
-                          </tr>
+                          </tr>                          
                       </tbody>
                   </table>
             </div>
