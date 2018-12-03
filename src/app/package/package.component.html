@@ -132,7 +132,8 @@
                         <label class="required-label blk">
                             Categorias
                         </label>
-                        <button class="btn btn-primary addCategories"
+                        <button type="button"
+                                class="btn btn-primary addCategories"
                                 (click)="categoriesModal()">
                             Adicionar categorias
                         </button>
@@ -181,78 +182,21 @@
 
                 <label>Imagens</label>
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div class="panel panel-default product-image-main">
-                            <div class="panel-body">
-                                <img [src]="imagesSrc[0] || 'http://placehold.it/470x350'"
-                                     class="package-image">
-                                <div class="form-group">
-                                   <input type="file"
-                                          class="form-control"
-                                          formControlName="src"
-                                          (change)="previewImage($event, 1)">
-                                </div>
-                                <button class="btn btn-primary blk center"
-                                        (click)="deleteImage()"
-                                        *ngIf="imagesSrc[0] != undefined">
-                                    Excluir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-3"
+                         *ngFor="let image of imagesSrc;let i = index">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <img [src]="imagesSrc[1] || 'http://placehold.it/470x350'"
+                                <img [src]="image.src || 'http://placehold.it/470x350'"
                                      class="package-image">
                                 <div class="form-group">
                                    <input type="file"
                                           class="form-control"
                                           formControlName="src"
-                                          (change)="previewImage($event, 2)">
+                                          (change)="previewImage($event, i)">
                                 </div>
                                 <button class="btn btn-primary blk center"
                                         (click)="deleteImage()"
-                                        *ngIf="imagesSrc[1] != undefined">
-                                    Excluir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img [src]="imagesSrc[2] || 'http://placehold.it/470x350'"
-                                     class="package-image">
-                                <div class="form-group">
-                                   <input type="file"
-                                          class="form-control"
-                                          formControlName="src"
-                                          (change)="previewImage($event, 3)">
-                                </div>
-                                <button class="btn btn-primary blk center"
-                                        (click)="deleteImage()"
-                                        *ngIf="imagesSrc[2] != undefined">
-                                    Excluir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img [src]="imagesSrc[3] || 'http://placehold.it/470x350'"
-                                     class="package-image">
-                                <div class="form-group">
-                                   <input type="file"
-                                          class="form-control"
-                                          value="{{ editPackage.fourth_image }}"
-                                          formControlName="src"
-                                          (change)="previewImage($event, 4)">
-                                </div>
-                                <button class="btn btn-primary blk center"
-                                        (click)="deleteImage()"
-                                        *ngIf="imagesSrc[3] != undefined">
+                                        *ngIf="image.src != ''">
                                     Excluir
                                 </button>
                             </div>

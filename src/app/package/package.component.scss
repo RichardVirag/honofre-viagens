@@ -46,23 +46,23 @@ form {
 .col-sm-3 .panel {
     position: relative;
     overflow: hidden;
+}
 
-    &.product-image-main:before {
-        content: "Principal";
-        font-family: Open Sans,sans-serif;
-        text-transform: uppercase;
-        text-align: center;
-        color: #fff;
-        background-color: #337ab7;
-        display: block;
-        padding: 10px 0;
-        width: 200px;
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        transform: translate(-34%,36%) rotate(-45deg);
-        z-index: 1;
-    }
+.col-sm-3:first-child .panel:before {
+    content: "Principal";
+    font-family: Open Sans,sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    background-color: #337ab7;
+    display: block;
+    padding: 10px 0;
+    width: 200px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    transform: translate(-34%,36%) rotate(-45deg);
+    z-index: 1;
 }
 
 .freeColumn {

@@ -39,16 +39,18 @@ export class PackageComponent implements OnInit {
             value: ['', [Validators.required]],
             src: [''],
         });
-
-        this.imagesSrc[0] = undefined;
-        this.imagesSrc[1] = undefined;
-        this.imagesSrc[2] = undefined;
-        this.imagesSrc[3] = undefined;
     }
 
     ngOnInit() {
         this.getPackages();
         this.getCategoriesToSelect();
+
+        if(this.editPackage.id == "") {
+            this.imagesSrc[0] = JSON.parse('{"src":""}');
+            this.imagesSrc[1] = JSON.parse('{"src":""}');
+            this.imagesSrc[2] = JSON.parse('{"src":""}');
+            this.imagesSrc[3] = JSON.parse('{"src":""}');
+        }
     }
 
     getPackages() {
@@ -96,6 +98,17 @@ export class PackageComponent implements OnInit {
         this.selectedCategories.splice(
             this.selectedCategories.indexOf(selcategory), 1
         );
+    }
+
+    previewImage(event: Event, index): void {
+        if ((<HTMLInputElement>event.target).files && (<HTMLInputElement>event.target).files[0]) {
+            this.imagesSrc[index].file = (<HTMLInputElement>event.target).files[0];
+
+            const reader = new FileReader();
+            reader.onload = e => this.imagesSrc[index].src = reader.result;
+
+            reader.readAsDataURL(this.imagesSrc[index].file);
+        }
     }
 
     addUpdatePackage() {
