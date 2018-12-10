@@ -93,7 +93,6 @@
                         <div class="form-group">
                             <label class="required-label">Status</label>
                             <select class="form-control"
-                                    value="{{ editPackage.status_id }}"
                                     formControlName="status_id"
                                     [(ngModel)]="editPackage.status_id">
                                 <option [ngValue]="1">Ativo</option>
@@ -186,11 +185,14 @@
                          *ngFor="let image of imagesSrc;let i = index">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <img [src]="image.src || 'http://placehold.it/470x350'"
-                                     class="package-image">
+                                <div class="image-content">
+                                    <img [src]="image.src || 'http://placehold.it/470x350'"
+                                         class="package-image">
+                                </div>
                                 <div class="form-group">
                                    <input type="file"
                                           class="form-control"
+                                          accept="image/*"
                                           formControlName="src"
                                           (change)="previewImage($event, i)">
                                 </div>

@@ -116,8 +116,28 @@ export class ApiService {
 
     /* Packages */
 
-    getAllPackages() {
+    getAllPackage() {
         return this.httpClient.get(this.apiUrl + '/packages/all', {
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
+
+    insertPackage(title, status, short_description, description, value) {
+        return this.httpClient.post(this.apiUrl + '/packages/add',{
+            "title":title,
+            "status":status,
+            "short_description":short_description,
+            "description":description,
+            "value":value
+        },{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
+
+    insertImagePackage(uploadData) {
+        return this.httpClient.post(this.apiUrl + '/packages/image/add',uploadData,{
             headers: new HttpHeaders().set('Authorization',
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });

@@ -23,8 +23,9 @@ export class PackageComponent implements OnInit {
 
     hasUploadedFile = false;
     imagesSrc = [];
-    selectedFiles = [];
     selectedCategories = [];
+
+    addedPackageId = 0;
 
     constructor(
         private fb: FormBuilder,
@@ -54,7 +55,7 @@ export class PackageComponent implements OnInit {
     }
 
     getPackages() {
-        this.api.getAllPackages()
+        this.api.getAllPackage()
         .subscribe(
             data => {
                 this.packages = data;
@@ -71,6 +72,7 @@ export class PackageComponent implements OnInit {
 
     newPackage() {
         this.showForm = !this.showForm;
+        this.getCategoriesToSelect();
     }
 
     categoriesModal() {
@@ -113,7 +115,47 @@ export class PackageComponent implements OnInit {
 
     addUpdatePackage() {
         if (this.formPackage.valid) {
-            this.errorMsg = null;
+            if(this.selectedCategories.length === 0) {
+                this.errorMsg = "Selecione ao menos uma categoria para prosseguir";
+                document.getElementById('top').scrollIntoView();
+            }
+            else {
+                this.api.insertPackage(
+                    this.formPackage.value.title,
+                    this.formPackage.value.status_id,
+                    this.formPackage.value.short_description,
+                    this.formPackage.value.description,
+                    this.formPackage.value.value
+                ).subscribe(
+                    data => {
+                        this.addedPackageId = data[0].id;
+
+                        for (let key in this.imagesSrc) {
+                            if(this.imagesSrc[key].src != "") {
+
+                                let uploadData = new FormData();
+                                uploadData.append('packageImage', this.imagesSrc[key].file);
+                                uploadData.append('id', this.addedPackageId.toString());
+                                uploadData.append('sequence', (parseInt(key) + 1).toString());
+
+                                this.api.insertImagePackage(
+                                    uploadData
+                                ).subscribe(
+                                    res => {  }
+                                );
+                            }
+                        }
+
+                        this.showForm = false;
+                        this.imagesSrc = [];
+                        this.selectedCategories = [];
+                        this.formPackage.reset();
+                        this.getPackages();
+                    }
+                );
+
+                this.errorMsg = null;
+            }
         }
         else {
             this.errorMsg = "Preencha os campos corretamente";
