@@ -47,11 +47,15 @@ export class PackageComponent implements OnInit {
         this.getCategoriesToSelect();
 
         if(this.editPackage.id == "") {
-            this.imagesSrc[0] = JSON.parse('{"src":""}');
-            this.imagesSrc[1] = JSON.parse('{"src":""}');
-            this.imagesSrc[2] = JSON.parse('{"src":""}');
-            this.imagesSrc[3] = JSON.parse('{"src":""}');
+            this.resetImaageSrc();
         }
+    }
+
+    resetImaageSrc() {
+        this.imagesSrc[0] = JSON.parse('{"src":""}');
+        this.imagesSrc[1] = JSON.parse('{"src":""}');
+        this.imagesSrc[2] = JSON.parse('{"src":""}');
+        this.imagesSrc[3] = JSON.parse('{"src":""}');
     }
 
     getPackages() {
@@ -147,7 +151,7 @@ export class PackageComponent implements OnInit {
                         }
 
                         this.showForm = false;
-                        this.imagesSrc = [];
+                        this.resetImaageSrc();
                         this.selectedCategories = [];
                         this.formPackage.reset();
                         this.getPackages();
@@ -166,6 +170,7 @@ export class PackageComponent implements OnInit {
     cancel() {
         this.errorMsg = null;
         this.formPackage.reset();
+        this.resetImaageSrc();
         this.newPackage();
     }
 
