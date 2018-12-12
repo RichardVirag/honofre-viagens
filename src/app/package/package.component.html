@@ -182,7 +182,7 @@
                 <label>Imagens</label>
                 <div class="row">
                     <div class="col-sm-3"
-                         *ngFor="let image of imagesSrc;let i = index">
+                         *ngFor="let image of imagesSrc; let i = index;">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="image-content">
@@ -197,7 +197,8 @@
                                           (change)="previewImage($event, i)">
                                 </div>
                                 <button class="btn btn-primary blk center"
-                                        (click)="deleteImage()"
+                                        type="button"
+                                        (click)="deleteImage(i)"
                                         *ngIf="image.src != ''">
                                     Excluir
                                 </button>

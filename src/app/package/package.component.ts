@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../_services/api.service';
+import { ChangeDetectorRef } from "@angular/core";
 
 @Component({
     selector: 'app-package',
@@ -29,7 +30,8 @@ export class PackageComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private api: ApiService
+        private api: ApiService,
+        private cdRef: ChangeDetectorRef
     ) {
         this.formPackage = fb.group({
             id: [''],
@@ -104,6 +106,11 @@ export class PackageComponent implements OnInit {
         this.selectedCategories.splice(
             this.selectedCategories.indexOf(selcategory), 1
         );
+    }
+
+    deleteImage(index) {
+        this.imagesSrc[index] = JSON.parse('{"src":""}');
+        this.cdRef.detectChanges();
     }
 
     previewImage(event: Event, index): void {
