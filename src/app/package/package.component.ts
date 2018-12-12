@@ -65,6 +65,7 @@ export class PackageComponent implements OnInit {
         .subscribe(
             data => {
                 this.packages = data;
+                this.cdRef.detectChanges();
             }
         );
     }
