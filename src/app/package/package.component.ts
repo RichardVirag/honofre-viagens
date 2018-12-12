@@ -175,6 +175,17 @@ export class PackageComponent implements OnInit {
         }
     }
 
+    remove(id) {
+        if (confirm("Você tem certeza que quer excluir?")) {
+            this.api.deletePackage(id).subscribe(
+                res => {
+                    alert('Pacote removido com sucesso!');
+                    this.getPackages();
+                }
+            );
+        }
+    }
+
     cancel() {
         this.errorMsg = null;
         this.formPackage.reset();

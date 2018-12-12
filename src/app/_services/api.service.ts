@@ -142,4 +142,11 @@ export class ApiService {
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
+
+    deletePackage(id) {
+        return this.httpClient.delete(this.apiUrl + '/packages/remove/' + id,{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
 }
