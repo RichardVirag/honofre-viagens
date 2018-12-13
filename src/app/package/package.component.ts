@@ -158,6 +158,13 @@ export class PackageComponent implements OnInit {
                             }
                         }
 
+                        this.api.insertCategoriesPackage(
+                            this.selectedCategories,
+                            this.addedPackageId.toString()
+                        ).subscribe(
+                            res => {  }
+                        );
+
                         this.showForm = false;
                         this.resetImaageSrc();
                         this.selectedCategories = [];

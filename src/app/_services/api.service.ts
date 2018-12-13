@@ -14,14 +14,14 @@ export class ApiService {
     /* Auth */
 
     userAuth(user, pass) {
-        return this.httpClient.post(this.apiUrl + '/auth',{
+        return this.httpClient.post(this.apiUrl + '/auth', {
             "username":user,
             "password":pass
         });
     }
 
     logout(user) {
-        return this.httpClient.post(this.apiUrl + '/logout',{
+        return this.httpClient.post(this.apiUrl + '/logout', {
             "username":user
         },
         {
@@ -54,7 +54,7 @@ export class ApiService {
     }
 
     insertCategory(title, sequence, status, type) {
-        return this.httpClient.post(this.apiUrl + '/categories/add',{
+        return this.httpClient.post(this.apiUrl + '/categories/add', {
             "title":title,
             "sequence":sequence,
             "status":status,
@@ -66,7 +66,7 @@ export class ApiService {
     }
 
     updateCategory(title, sequence, status, type, id) {
-        return this.httpClient.post(this.apiUrl + '/categories/edit/' + id,{
+        return this.httpClient.post(this.apiUrl + '/categories/edit/' + id, {
             "title":title,
             "sequence":sequence,
             "status":status,
@@ -78,7 +78,7 @@ export class ApiService {
     }
 
     deleteCategory(id) {
-        return this.httpClient.delete(this.apiUrl + '/categories/remove/' + id,{
+        return this.httpClient.delete(this.apiUrl + '/categories/remove/' + id, {
             headers: new HttpHeaders().set('Authorization',
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
@@ -94,14 +94,14 @@ export class ApiService {
     }
 
     insertBanner(uploadData) {
-        return this.httpClient.post(this.apiUrl + '/banners/add',uploadData,{
+        return this.httpClient.post(this.apiUrl + '/banners/add', uploadData, {
             headers: new HttpHeaders().set('Authorization',
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
 
     updateBanner(uploadData, id) {
-        return this.httpClient.post(this.apiUrl + '/banners/edit/' + id,uploadData,{
+        return this.httpClient.post(this.apiUrl + '/banners/edit/' + id, uploadData, {
             headers: new HttpHeaders().set('Authorization',
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
@@ -137,7 +137,14 @@ export class ApiService {
     }
 
     insertImagePackage(uploadData) {
-        return this.httpClient.post(this.apiUrl + '/packages/image/add',uploadData,{
+        return this.httpClient.post(this.apiUrl + '/packages/image/add', uploadData, {
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
+
+    insertCategoriesPackage(selectedCategories, id) {
+        return this.httpClient.post(this.apiUrl + '/packages/categories/add/' + id, selectedCategories, {
             headers: new HttpHeaders().set('Authorization',
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
