@@ -156,4 +156,11 @@ export class ApiService {
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
+
+    getPackagesExtraInfo(id) {
+        return this.httpClient.get(this.apiUrl + '/packages/extrainfo/' + id,{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
 }

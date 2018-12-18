@@ -49,11 +49,11 @@ export class PackageComponent implements OnInit {
         this.getCategoriesToSelect();
 
         if(this.editPackage.id == "") {
-            this.resetImaageSrc();
+            this.resetImageSrc();
         }
     }
 
-    resetImaageSrc() {
+    resetImageSrc() {
         this.imagesSrc[0] = JSON.parse('{"src":""}');
         this.imagesSrc[1] = JSON.parse('{"src":""}');
         this.imagesSrc[2] = JSON.parse('{"src":""}');
@@ -80,6 +80,48 @@ export class PackageComponent implements OnInit {
     newPackage() {
         this.showForm = !this.showForm;
         this.getCategoriesToSelect();
+    }
+
+    edit(id) {
+        this.editPackage = JSON.parse(JSON.stringify(this.packages.find(x=>x.id == id)));
+
+        if(this.editPackage.status == "Inativo") {
+            this.editPackage.status_id = 0;
+        }
+        else {
+            this.editPackage.status_id = 1;
+        }
+
+        this.api.getPackagesExtraInfo(id)
+        .subscribe(
+            data => {
+                this.editPackage.short_description = data['short_description'];
+                this.editPackage.description = data['description'];
+
+                this.selectEditCategories(data['categories']);
+                this.selectEditImages(data['images']);
+            }
+        );
+        this.cdRef.detectChanges();
+        this.newPackage();
+    }
+
+    selectEditCategories(data) {
+        this.selectedCategories = [];
+        data.forEach(function (selectedcategory) {
+            this.categoriesToSelect.forEach(function (category) {
+                if(category.id == selectedcategory.id) {
+                    this.selectCategory(category);
+                }
+            }.bind(this));
+        }.bind(this));
+    }
+
+    selectEditImages(data) {
+        this.resetImageSrc();
+        data.forEach(function (image) {
+            this.imagesSrc[image.sequence - 1].src = image.src;
+        }.bind(this));
     }
 
     categoriesModal() {
@@ -166,7 +208,7 @@ export class PackageComponent implements OnInit {
                         );
 
                         this.showForm = false;
-                        this.resetImaageSrc();
+                        this.resetImageSrc();
                         this.selectedCategories = [];
                         this.formPackage.reset();
                         this.getPackages();
@@ -196,7 +238,8 @@ export class PackageComponent implements OnInit {
     cancel() {
         this.errorMsg = null;
         this.formPackage.reset();
-        this.resetImaageSrc();
+        this.selectedCategories = [];
+        this.resetImageSrc();
         this.newPackage();
     }
 
