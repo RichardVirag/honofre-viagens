@@ -150,6 +150,19 @@ export class ApiService {
         });
     }
 
+    updatePackage(title, status, short_description, description, value, id) {
+        return this.httpClient.post(this.apiUrl + '/packages/edit/' + id,{
+            "title":title,
+            "status":status,
+            "short_description":short_description,
+            "description":description,
+            "value":value
+        },{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
+
     deletePackage(id) {
         return this.httpClient.delete(this.apiUrl + '/packages/remove/' + id,{
             headers: new HttpHeaders().set('Authorization',
@@ -159,6 +172,13 @@ export class ApiService {
 
     getPackagesExtraInfo(id) {
         return this.httpClient.get(this.apiUrl + '/packages/extrainfo/' + id,{
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
+
+    editImagePackage(uploadData, id) {
+        return this.httpClient.post(this.apiUrl + '/packages/image/edit/' + id, uploadData, {
             headers: new HttpHeaders().set('Authorization',
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });

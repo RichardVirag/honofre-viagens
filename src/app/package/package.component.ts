@@ -173,6 +173,43 @@ export class PackageComponent implements OnInit {
                 this.errorMsg = "Selecione ao menos uma categoria para prosseguir";
                 document.getElementById('top').scrollIntoView();
             }
+            else if(this.editPackage.id != "") {
+                this.api.updatePackage(
+                    this.formPackage.value.title,
+                    this.formPackage.value.status_id,
+                    this.formPackage.value.short_description,
+                    this.formPackage.value.description,
+                    this.formPackage.value.value,
+                    this.editPackage.id
+                ).subscribe(
+                    res => {
+                        var key = 0;
+                        this.imagesSrc.forEach(function (img) {
+                            let uploadData = new FormData();
+                            uploadData.append('packageImage', this.imagesSrc[key].file);
+                            uploadData.append('src', this.imagesSrc[key].src);
+                            uploadData.append('sequence', (key + 1).toString());
+
+                            key++;
+
+                            this.api.editImagePackage(
+                                uploadData, this.editPackage.id
+                            ).subscribe(
+                                res => {  }
+                            );
+                        }.bind(this));
+
+                        this.showForm = false;
+                        this.resetImageSrc();
+                        this.selectedCategories = [];
+                        this.formPackage.reset();
+                        this.getPackages();
+                    }
+                );
+
+                this.errorMsg = null;
+                this.cdRef.detectChanges();
+            }
             else {
                 this.api.insertPackage(
                     this.formPackage.value.title,
