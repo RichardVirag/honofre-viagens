@@ -83,6 +83,7 @@ export class PackageComponent implements OnInit {
     }
 
     edit(id) {
+        this.formPackage.reset();
         this.editPackage = JSON.parse(JSON.stringify(this.packages.find(x=>x.id == id)));
 
         if(this.editPackage.status == "Inativo") {
@@ -103,7 +104,7 @@ export class PackageComponent implements OnInit {
             }
         );
         this.cdRef.detectChanges();
-        this.newPackage();
+        this.showForm = !this.showForm;
     }
 
     selectEditCategories(data) {
