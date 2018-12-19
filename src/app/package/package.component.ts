@@ -83,7 +83,6 @@ export class PackageComponent implements OnInit {
     }
 
     edit(id) {
-        this.formPackage.reset();
         this.editPackage = JSON.parse(JSON.stringify(this.packages.find(x=>x.id == id)));
 
         if(this.editPackage.status == "Inativo") {
@@ -186,9 +185,10 @@ export class PackageComponent implements OnInit {
                     res => {
                         var key = 0;
                         this.imagesSrc.forEach(function (img) {
+                            console.log(img);
                             let uploadData = new FormData();
-                            uploadData.append('packageImage', this.imagesSrc[key].file);
-                            uploadData.append('src', this.imagesSrc[key].src);
+                            uploadData.append('packageImage',img.file);
+                            uploadData.append('src', img.src);
                             uploadData.append('sequence', (key + 1).toString());
 
                             key++;
@@ -199,17 +199,26 @@ export class PackageComponent implements OnInit {
                                 res => {  }
                             );
                         }.bind(this));
-
-                        this.showForm = false;
-                        this.resetImageSrc();
-                        this.selectedCategories = [];
-                        this.formPackage.reset();
-                        this.getPackages();
                     }
                 );
 
-                this.errorMsg = null;
-                this.cdRef.detectChanges();
+
+                this.api.editCategoriesPackage(
+                    this.selectedCategories,
+                    this.editPackage.id
+                ).subscribe(
+                    res => {
+                        this.showForm = false;
+                        this.resetImageSrc();
+                        this.selectedCategories = [];
+                        this.getCategoriesToSelect();
+                        this.formPackage.reset();
+                        this.getPackages();
+
+                        this.errorMsg = null;
+                        this.cdRef.detectChanges();
+                    }
+                );
             }
             else {
                 this.api.insertPackage(

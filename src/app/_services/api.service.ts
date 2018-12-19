@@ -183,4 +183,11 @@ export class ApiService {
             JSON.parse(localStorage.getItem("LoggedInUser")).token)
         });
     }
+
+    editCategoriesPackage(selectedCategories, id) {
+        return this.httpClient.post(this.apiUrl + '/packages/categories/update/' + id, selectedCategories, {
+            headers: new HttpHeaders().set('Authorization',
+            JSON.parse(localStorage.getItem("LoggedInUser")).token)
+        });
+    }
 }
