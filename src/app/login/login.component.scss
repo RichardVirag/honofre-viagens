@@ -9,7 +9,11 @@
     .login {
         background: #FFF;
         padding: 50px;
-        margin-top: 40%;
-        transform: translate(0, -50%);
+        position: absolute;
+        left: 30%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 510px;
+        height: 460px;
     }
 }

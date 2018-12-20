@@ -136,3 +136,14 @@ $awesome: FontAwesome;
         }
     }
 }
+
+@media (max-width: 1735px) {
+    nav {
+        img {
+            display: none;
+        }
+        p {
+            padding: 25px;  
+        }
+    }
+}
