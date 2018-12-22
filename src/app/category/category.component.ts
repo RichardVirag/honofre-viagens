@@ -71,7 +71,7 @@ export class CategoryComponent implements OnInit {
                 this.formCategory.value.type = "null";
             }
 
-            if(this.editCategory.id != undefined) {
+            if(this.editCategory.id != "") {
                 this.api.updateCategory(
                     this.formCategory.value.title,
                     this.formCategory.value.sequence,
