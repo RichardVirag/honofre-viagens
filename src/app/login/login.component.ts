@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         const md5 = new Md5();
-        if (this.form.valid) {            
+        if (this.form.valid) {
             this.api.userAuth(
                 this.form.value.login,
                 md5.appendStr(this.form.value.password).end()

@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-    constructor(private auth: AuthService,
+    constructor(
+        private auth: AuthService,
         private myRoute: Router){
     }
     canActivate(
@@ -16,7 +17,8 @@ export class AuthGuard implements CanActivate {
         state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         if(this.auth.isLoggednIn()){
             return true;
-        }else{
+        }
+        else{
             this.myRoute.navigate(["login"]);
             return false;
         }

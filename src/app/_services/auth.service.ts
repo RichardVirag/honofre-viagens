@@ -20,6 +20,13 @@ export class AuthService {
     isLoggednIn() {
         return this.getLoggedUser() !== null;
     }
+    isTokenValid(token) {
+        if(token == 401) {
+            alert("Sessao expirada")
+            localStorage.removeItem("LoggedInUser");
+            this.myRoute.navigate(["login"]);
+        }
+    }
     logout(LoggedInUser) {
         this.api.logout(LoggedInUser)
         .subscribe((res) => {

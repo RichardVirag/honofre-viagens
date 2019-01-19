@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
 import { ApiService } from '../_services/api.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class BannerComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
+        private auth: AuthService,
         private api: ApiService
     ) {
         this.formBanner = fb.group({
@@ -41,6 +43,9 @@ export class BannerComponent implements OnInit {
         .subscribe(
             data => {
                 this.banners = data;
+            },
+            res => {
+                this.auth.isTokenValid(res['status']);
             }
         );
     }
@@ -98,6 +103,7 @@ export class BannerComponent implements OnInit {
                     uploadData
                 ).subscribe(
                     res => {
+                        this.auth.isTokenValid(res['status']);
                         this.getBanners();
                         this.formBanner.reset();
                         this.imageSrc = null;
@@ -141,6 +147,7 @@ export class BannerComponent implements OnInit {
         if (confirm("Você tem certeza que quer excluir?")) {
             this.api.deleteBanner(id).subscribe(
                 res => {
+                    this.auth.isTokenValid(res['status']);
                     alert('Banner removido com sucesso!');
                     this.getBanners();
                 }

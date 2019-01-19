@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 import { ApiService } from '../_services/api.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class CategoryComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
+        private auth: AuthService,
         private api: ApiService
     ) {
         this.formCategory = fb.group({
@@ -41,6 +43,9 @@ export class CategoryComponent implements OnInit {
                 for (let key in this.categories) {
                     this.hasSubcategories(this.categories[key].id, key);
                 }
+            },
+            res => {
+                this.auth.isTokenValid(res['status']);
             }
         );
     }
@@ -57,6 +62,9 @@ export class CategoryComponent implements OnInit {
         .subscribe(
             data => {
                 this.categories[key].subcategories = data;
+            },
+            res => {
+                this.auth.isTokenValid(res['status']);
             }
         );
     }
@@ -80,6 +88,7 @@ export class CategoryComponent implements OnInit {
                     this.editCategory.id
                 ).subscribe(
                     res => {
+                        this.auth.isTokenValid(res['status']);
                         this.getCategories();
                         this.editCategory = [];
                         this.formCategory.reset();
@@ -94,6 +103,7 @@ export class CategoryComponent implements OnInit {
                     this.formCategory.value.type
                 ).subscribe(
                     res => {
+                        this.auth.isTokenValid(res['status']);
                         this.getCategories();
                         this.formCategory.reset();
                     }
@@ -131,6 +141,7 @@ export class CategoryComponent implements OnInit {
         if (confirm("Você tem certeza que quer excluir?")) {
             this.api.deleteCategory(id).subscribe(
                 res => {
+                    this.auth.isTokenValid(res['status']);
                     alert('Categoria removida com sucesso!');
                     this.getCategories();
                 }

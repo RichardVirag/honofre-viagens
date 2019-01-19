@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../_services/auth.service';
 import { ApiService } from '../_services/api.service';
 import { ChangeDetectorRef } from "@angular/core";
 
@@ -30,6 +31,7 @@ export class PackageComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
+        private auth: AuthService,
         private api: ApiService,
         private cdRef: ChangeDetectorRef
     ) {
@@ -66,6 +68,9 @@ export class PackageComponent implements OnInit {
             data => {
                 this.packages = data;
                 this.cdRef.detectChanges();
+            },
+            res => {
+                this.auth.isTokenValid(res['status']);
             }
         );
     }
@@ -100,6 +105,9 @@ export class PackageComponent implements OnInit {
 
                 this.selectEditCategories(data['categories']);
                 this.selectEditImages(data['images']);
+            },
+            res => {
+                this.auth.isTokenValid(res['status']);
             }
         );
         this.cdRef.detectChanges();
@@ -133,6 +141,9 @@ export class PackageComponent implements OnInit {
         .subscribe(
             data => {
                 this.categoriesToSelect = data;
+            },
+            res => {
+                this.auth.isTokenValid(res['status']);
             }
         );
     }
@@ -183,6 +194,7 @@ export class PackageComponent implements OnInit {
                     this.editPackage.id
                 ).subscribe(
                     res => {
+                        this.auth.isTokenValid(res['status']);
                         var key = 0;
                         this.imagesSrc.forEach(function (img) {
                             console.log(img);
@@ -196,7 +208,9 @@ export class PackageComponent implements OnInit {
                             this.api.editImagePackage(
                                 uploadData, this.editPackage.id
                             ).subscribe(
-                                res => {  }
+                                res => {
+                                    this.auth.isTokenValid(res['status']);
+                                }
                             );
                         }.bind(this));
                     }
@@ -208,6 +222,7 @@ export class PackageComponent implements OnInit {
                     this.editPackage.id
                 ).subscribe(
                     res => {
+                        this.auth.isTokenValid(res['status']);
                         this.showForm = false;
                         this.resetImageSrc();
                         this.selectedCategories = [];
@@ -242,7 +257,9 @@ export class PackageComponent implements OnInit {
                                 this.api.insertImagePackage(
                                     uploadData
                                 ).subscribe(
-                                    res => {  }
+                                    res => {
+                                        this.auth.isTokenValid(res['status']);
+                                    }
                                 );
                             }
                         }
@@ -251,7 +268,9 @@ export class PackageComponent implements OnInit {
                             this.selectedCategories,
                             this.addedPackageId.toString()
                         ).subscribe(
-                            res => {  }
+                            res => {
+                                this.auth.isTokenValid(res['status']);
+                            }
                         );
 
                         this.showForm = false;
@@ -259,6 +278,9 @@ export class PackageComponent implements OnInit {
                         this.selectedCategories = [];
                         this.formPackage.reset();
                         this.getPackages();
+                    },
+                    res => {
+                        this.auth.isTokenValid(res['status']);
                     }
                 );
 
@@ -275,6 +297,7 @@ export class PackageComponent implements OnInit {
         if (confirm("Você tem certeza que quer excluir?")) {
             this.api.deletePackage(id).subscribe(
                 res => {
+                    this.auth.isTokenValid(res['status']);
                     alert('Pacote removido com sucesso!');
                     this.getPackages();
                 }
